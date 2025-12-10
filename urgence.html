@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Page Urgence - COLLOCOV">
+    <title>Page Urgence - COLLOCOV</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="dist/css/main.css">
+</head>
+<body>
+    <!-- Header Navigation -->
+    <header class="header">
+        <nav class="nav container">
+            <div class="nav__logo">
+                <a href="index.html" class="logo-link">/COLLOCOV</a>
+            </div>
+            <ul class="nav__menu">
+                <li class="nav__item"><a href="index.html" class="nav__link">Acceuil</a></li>
+                <li class="nav__item"><a href="contact.html" class="nav__link">Contact</a></li>
+                <li class="nav__item"><a href="urgence.html" class="nav__link nav__link--active">urgence</a></li>
+            </ul>
+            <div class="nav__actions">
+                <div class="nav__profile">
+                    <button class="nav__profile-btn" id="profileBtn" aria-label="Menu profil">
+                        <img src="https://ui-avatars.com/api/?name=User&background=3B82F6&color=fff&size=128" alt="Profile" class="nav__profile-img" id="profileImg">
+                    </button>
+                    <div class="nav__dropdown" id="profileDropdown">
+                        <a href="#" class="nav__dropdown-item" onclick="window.location.href='profile.html'; return false;">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                                <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+                                <circle cx="12" cy="7" r="4"></circle>
+                            </svg>
+                            My profile
+                        </a>
+                        <div class="nav__dropdown-divider"></div>
+                        <div class="nav__dropdown-user" id="dropdownUserName"></div>
+                        <button class="nav__dropdown-item nav__dropdown-item--logout" onclick="logoutUser()">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                                <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path>
+                                <polyline points="16 17 21 12 16 7"></polyline>
+                                <line x1="21" y1="12" x2="9" y2="12"></line>
+                            </svg>
+                            Déconnexion
+                        </button>
+                    </div>
+                </div>
+            </div>
+            <button class="nav__toggle" aria-label="Toggle menu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+        </nav>
+    </header>
+
+    <!-- Main Content -->
+    <main class="main">
+        <div class="dashboard-layout">
+            <!-- Sidebar Navigation -->
+            <aside class="sidebar">
+                <div class="sidebar__header">
+                    <div class="sidebar__user">
+                        <img src="https://ui-avatars.com/api/?name=User&background=3B82F6&color=fff&size=128" alt="Profile" class="sidebar__user-img" id="sidebarProfileImg">
+                        <span class="sidebar__user-name" id="sidebarUserName">Utilisateur</span>
+                    </div>
+                    <div class="sidebar__icons">
+                        <button class="sidebar__icon-btn" id="messagesBtn" aria-label="Messages" onclick="window.location.href='inbox.html'">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>
+                            </svg>
+                            <span class="sidebar__icon-badge" id="messagesBadge">0</span>
+                        </button>
+                        <button class="sidebar__icon-btn" id="notificationsBtn" aria-label="Notifications" onclick="window.location.href='notifications.html'">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"></path>
+                                <path d="M13.73 21a2 2 0 0 1-3.46 0"></path>
+                            </svg>
+                            <span class="sidebar__icon-badge" id="notificationsBadge">0</span>
+                        </button>
+                    </div>
+                </div>
+                <nav class="sidebar__nav">
+                    <a href="dashboard.html" class="sidebar__nav-item">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <rect x="3" y="3" width="7" height="7"></rect>
+                            <rect x="14" y="3" width="7" height="7"></rect>
+                            <rect x="14" y="14" width="7" height="7"></rect>
+                            <rect x="3" y="14" width="7" height="7"></rect>
+                        </svg>
+                        <span>Tableau de bord</span>
+                    </a>
+                    <a href="covoiturages.html" class="sidebar__nav-item">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M5 17H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2h-1"></path>
+                            <polygon points="12 15 17 21 7 21 12 15"></polygon>
+                        </svg>
+                        <span>Liste des covoiturages</span>
+                    </a>
+                    <a href="colocations.html" class="sidebar__nav-item">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
+                            <polyline points="9 22 9 12 15 12 15 22"></polyline>
+                        </svg>
+                        <span>Liste des colocations</span>
+                    </a>
+                    <a href="profile.html" class="sidebar__nav-item">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+                            <circle cx="12" cy="7" r="4"></circle>
+                        </svg>
+                        <span>My profile</span>
+                    </a>
+                    <a href="reviews.html" class="sidebar__nav-item">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon>
+                        </svg>
+                        <span>Liste des reviews</span>
+                    </a>
+                </nav>
+            </aside>
+
+            <!-- Urgence Content -->
+            <div class="dashboard-main">
+                <div class="urgence-section">
+                    <div class="urgence-container">
+                        <div class="urgence-content">
+                            <h1 class="urgence-title">Page Urgence !</h1>
+                            <p class="urgence-question">votre covoiturage en retard ?</p>
+                            
+                            <div class="urgence-actions">
+                                <button class="urgence-btn urgence-btn--support">
+                                    <div class="urgence-btn__icon urgence-btn__icon--support">
+                                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                            <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+                                            <circle cx="12" cy="7" r="4"></circle>
+                                            <path d="M12 11v6"></path>
+                                            <path d="M9 14h6"></path>
+                                        </svg>
+                                    </div>
+                                    <span class="urgence-btn__text">Contacter le support !</span>
+                                </button>
+                                
+                                <button class="urgence-btn urgence-btn--alternatives">
+                                    <div class="urgence-btn__icon urgence-btn__icon--info">
+                                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                            <circle cx="12" cy="12" r="10"></circle>
+                                            <line x1="12" y1="16" x2="12" y2="12"></line>
+                                            <line x1="12" y1="8" x2="12.01" y2="8"></line>
+                                        </svg>
+                                    </div>
+                                    <span class="urgence-btn__text">Voir alternatives</span>
+                                </button>
+                                
+                                <button class="urgence-btn urgence-btn--report">
+                                    <div class="urgence-btn__icon urgence-btn__icon--warning">
+                                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                            <path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"></path>
+                                            <line x1="12" y1="9" x2="12" y2="13"></line>
+                                            <line x1="12" y1="17" x2="12.01" y2="17"></line>
+                                        </svg>
+                                    </div>
+                                    <span class="urgence-btn__text">Signaler le trajet</span>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="urgence-decoration">
+                            <div class="urgence-decoration__circle"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer__content">
+                <div class="footer__section footer__about">
+                    <h3 class="footer__logo">/COLLOCOV</h3>
+                    <p class="footer__description">
+                        La plateforme qui connecte les étudiants pour la colocation et le covoiturage. 
+                        Libère ton potentiel étudiant avec nous.
+                    </p>
+                </div>
+                <div class="footer__section">
+                    <h4 class="footer__title">Liens rapides</h4>
+                    <ul class="footer__links">
+                        <li><a href="index.html" class="footer__link">Acceuil</a></li>
+                        <li><a href="#" class="footer__link">À propos</a></li>
+                        <li><a href="#" class="footer__link">Contact</a></li>
+                        <li><a href="#" class="footer__link">Tarifs</a></li>
+                    </ul>
+                </div>
+                <div class="footer__section">
+                    <h4 class="footer__title">Services</h4>
+                    <ul class="footer__links">
+                        <li><a href="#" class="footer__link">Colocation Étudiante</a></li>
+                        <li><a href="#" class="footer__link">Covoiturage</a></li>
+                        <li><a href="urgence.html" class="footer__link">Urgence</a></li>
+                        <li><a href="#" class="footer__link">FAQ</a></li>
+                    </ul>
+                </div>
+                <div class="footer__section">
+                    <h4 class="footer__title">Contact</h4>
+                    <ul class="footer__links">
+                        <li><a href="mailto:contact@collocov.com" class="footer__link">contact@collocov.com</a></li>
+                        <li><a href="tel:+33123456789" class="footer__link">+33 1 23 45 67 89</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer__bottom">
+                <p class="footer__copyright">
+                    &copy; 2024 COLLOCOV. Tous droits réservés.
+                </p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="js/auth.js"></script>
+    <script src="js/main.js"></script>
+    <script>
+        // Vérifier si l'utilisateur est connecté
+        document.addEventListener('DOMContentLoaded', function() {
+            const currentUser = isLoggedIn();
+            
+            if (!currentUser) {
+                alert('Vous devez être connecté pour accéder à cette page');
+                window.location.href = 'connexion.html';
+                return;
+            }
+            
+            // Mettre à jour l'image de profil avec le nom de l'utilisateur
+            const profileImg = document.getElementById('profileImg');
+            if (profileImg) {
+                const userName = currentUser.nom || 'User';
+                profileImg.src = `https://ui-avatars.com/api/?name=${encodeURIComponent(userName)}&background=3B82F6&color=fff&size=128`;
+            }
+            
+            // Mettre à jour l'image de profil dans la sidebar
+            const sidebarProfileImg = document.getElementById('sidebarProfileImg');
+            if (sidebarProfileImg) {
+                const userName = currentUser.nom || 'User';
+                sidebarProfileImg.src = `https://ui-avatars.com/api/?name=${encodeURIComponent(userName)}&background=3B82F6&color=fff&size=128`;
+            }
+            
+            // Afficher le nom de l'utilisateur dans la sidebar
+            const sidebarUserName = document.getElementById('sidebarUserName');
+            if (sidebarUserName) {
+                sidebarUserName.textContent = currentUser.nom;
+            }
+            
+            // Afficher le nom de l'utilisateur dans le dropdown
+            const dropdownUserName = document.getElementById('dropdownUserName');
+            if (dropdownUserName) {
+                dropdownUserName.textContent = currentUser.nom;
+            }
+            
+            // Gestion du menu déroulant du profil
+            const profileBtn = document.getElementById('profileBtn');
+            const profileDropdown = document.getElementById('profileDropdown');
+            
+            if (profileBtn && profileDropdown) {
+                profileBtn.addEventListener('click', function(e) {
+                    e.stopPropagation();
+                    profileDropdown.classList.toggle('active');
+                });
+                
+                // Fermer le menu en cliquant ailleurs
+                document.addEventListener('click', function(e) {
+                    if (!profileBtn.contains(e.target) && !profileDropdown.contains(e.target)) {
+                        profileDropdown.classList.remove('active');
+                    }
+                });
+            }
+
+            // Mettre en surbrillance l'élément actif dans la sidebar
+            const currentPage = window.location.pathname.split('/').pop() || 'urgence.html';
+            const navItems = document.querySelectorAll('.sidebar__nav-item');
+            navItems.forEach(item => {
+                const href = item.getAttribute('href');
+                if (href === currentPage) {
+                    item.classList.add('sidebar__nav-item--active');
+                }
+            });
+
+            // Gestion des boutons d'urgence
+            const supportBtn = document.querySelector('.urgence-btn--support');
+            const alternativesBtn = document.querySelector('.urgence-btn--alternatives');
+            const reportBtn = document.querySelector('.urgence-btn--report');
+
+            if (supportBtn) {
+                supportBtn.addEventListener('click', function() {
+                    alert('Redirection vers le support...');
+                    // window.location.href = 'support.html';
+                });
+            }
+
+            if (alternativesBtn) {
+                alternativesBtn.addEventListener('click', function() {
+                    alert('Affichage des alternatives...');
+                    // window.location.href = 'alternatives.html';
+                });
+            }
+
+            if (reportBtn) {
+                reportBtn.addEventListener('click', function() {
+                    alert('Ouverture du formulaire de signalement...');
+                    // window.location.href = 'signaler.html';
+                });
+            }
+        });
+    </script>
+</body>
+</html>
+
