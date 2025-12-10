@@ -1,0 +1,602 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Liste des covoiturages - COLLOCOV">
+    <title>Liste des covoiturages - COLLOCOV</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+    <link rel="stylesheet" href="dist/css/main.css">
+    <style>
+        .leaflet-container {
+            font-family: 'Inter', sans-serif;
+        }
+        .leaflet-popup-content-wrapper {
+            border-radius: 8px;
+            font-family: 'Inter', sans-serif;
+        }
+        .leaflet-popup-content {
+            margin: 0.75rem;
+            font-size: 0.9rem;
+        }
+        .leaflet-control-zoom {
+            border: none;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+            border-radius: 8px;
+            overflow: hidden;
+        }
+        .leaflet-control-zoom a {
+            background-color: #10b981;
+            color: #ffffff;
+            border: none;
+            width: 32px;
+            height: 32px;
+            line-height: 32px;
+            font-size: 1.2rem;
+            font-weight: 600;
+            transition: background-color 0.2s ease;
+        }
+        .leaflet-control-zoom a:hover {
+            background-color: #059669;
+        }
+    </style>
+</head>
+<body>
+    <!-- Header Navigation -->
+    <header class="header">
+        <nav class="nav container">
+            <div class="nav__logo">
+                <a href="index.html" class="logo-link">/COLLOCOV</a>
+            </div>
+            <ul class="nav__menu">
+                <li class="nav__item"><a href="index.html" class="nav__link">Acceuil</a></li>
+                <li class="nav__item"><a href="contact.html" class="nav__link">Contact</a></li>
+                <li class="nav__item"><a href="urgence.html" class="nav__link">urgence</a></li>
+            </ul>
+            <div class="nav__actions">
+                <div class="nav__profile">
+                    <button class="nav__profile-btn" id="profileBtn" aria-label="Menu profil">
+                        <img src="https://ui-avatars.com/api/?name=User&background=3B82F6&color=fff&size=128" alt="Profile" class="nav__profile-img" id="profileImg">
+                    </button>
+                    <div class="nav__dropdown" id="profileDropdown">
+                        <a href="#" class="nav__dropdown-item" onclick="window.location.href='profile.html'; return false;">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                                <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+                                <circle cx="12" cy="7" r="4"></circle>
+                            </svg>
+                            My profile
+                        </a>
+                        <div class="nav__dropdown-divider"></div>
+                        <div class="nav__dropdown-user" id="dropdownUserName"></div>
+                        <button class="nav__dropdown-item nav__dropdown-item--logout" onclick="logoutUser()">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                                <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path>
+                                <polyline points="16 17 21 12 16 7"></polyline>
+                                <line x1="21" y1="12" x2="9" y2="12"></line>
+                            </svg>
+                            Déconnexion
+                        </button>
+                    </div>
+                </div>
+            </div>
+            <button class="nav__toggle" aria-label="Toggle menu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+        </nav>
+    </header>
+
+    <!-- Main Content -->
+    <main class="main">
+        <div class="dashboard-layout">
+            <!-- Sidebar Navigation -->
+            <aside class="sidebar">
+                <div class="sidebar__header">
+                    <div class="sidebar__user">
+                        <img src="https://ui-avatars.com/api/?name=User&background=3B82F6&color=fff&size=128" alt="Profile" class="sidebar__user-img" id="sidebarProfileImg">
+                        <span class="sidebar__user-name" id="sidebarUserName">Utilisateur</span>
+                    </div>
+                    <div class="sidebar__icons">
+                        <button class="sidebar__icon-btn" id="messagesBtn" aria-label="Messages" onclick="window.location.href='inbox.html'">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>
+                            </svg>
+                            <span class="sidebar__icon-badge" id="messagesBadge">0</span>
+                        </button>
+                        <button class="sidebar__icon-btn" id="notificationsBtn" aria-label="Notifications" onclick="window.location.href='notifications.html'">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"></path>
+                                <path d="M13.73 21a2 2 0 0 1-3.46 0"></path>
+                            </svg>
+                            <span class="sidebar__icon-badge" id="notificationsBadge">0</span>
+                        </button>
+                    </div>
+                </div>
+                <nav class="sidebar__nav">
+                    <a href="dashboard.html" class="sidebar__nav-item">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <rect x="3" y="3" width="7" height="7"></rect>
+                            <rect x="14" y="3" width="7" height="7"></rect>
+                            <rect x="14" y="14" width="7" height="7"></rect>
+                            <rect x="3" y="14" width="7" height="7"></rect>
+                        </svg>
+                        <span>Tableau de bord</span>
+                    </a>
+                    <a href="covoiturages.html" class="sidebar__nav-item sidebar__nav-item--active">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M5 17H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2h-1"></path>
+                            <polygon points="12 15 17 21 7 21 12 15"></polygon>
+                        </svg>
+                        <span>Liste des covoiturages</span>
+                    </a>
+                    <a href="colocations.html" class="sidebar__nav-item">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
+                            <polyline points="9 22 9 12 15 12 15 22"></polyline>
+                        </svg>
+                        <span>Liste des colocations</span>
+                    </a>
+                    <a href="profile.html" class="sidebar__nav-item">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+                            <circle cx="12" cy="7" r="4"></circle>
+                        </svg>
+                        <span>My profile</span>
+                    </a>
+                    <a href="reviews.html" class="sidebar__nav-item">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon>
+                        </svg>
+                        <span>Liste des reviews</span>
+                    </a>
+                </nav>
+            </aside>
+
+            <!-- Covoiturages Content -->
+            <div class="dashboard-main">
+                <div class="container">
+                    <div class="covoiturages-section">
+                        <div class="covoiturages-header">
+                            <h1 class="covoiturages-title">Liste des covoiturages</h1>
+                            <button class="btn btn--yellow-outline btn--propose" onclick="window.location.href='proposer-trajet.html'">
+                                <span class="btn__icon-circle">
+                                    <img src="image/image 1.png" alt="Car icon" class="btn__car-icon">
+                                </span>
+                                Proposer un trajet
+                            </button>
+                        </div>
+                        
+                        <div class="covoiturages-filters">
+                            <div class="filter-group">
+                                <label for="searchFrom" class="filter-label">De</label>
+                                <input type="text" id="searchFrom" class="filter-input" placeholder="Lieu de départ">
+                            </div>
+                            <div class="filter-group">
+                                <label for="searchTo" class="filter-label">Vers</label>
+                                <input type="text" id="searchTo" class="filter-input" placeholder="Destination">
+                            </div>
+                            <div class="filter-group">
+                                <label for="searchDate" class="filter-label">Date</label>
+                                <input type="date" id="searchDate" class="filter-input">
+                            </div>
+                            <div class="filter-group">
+                                <label for="searchTime" class="filter-label">Heure</label>
+                                <input type="time" id="searchTime" class="filter-input">
+                            </div>
+                            <button class="btn btn--primary btn--search" id="searchBtn">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <circle cx="11" cy="11" r="8"></circle>
+                                    <path d="m21 21-4.35-4.35"></path>
+                                </svg>
+                                Rechercher
+                            </button>
+                        </div>
+                        
+                        <div class="covoiturages-grid" id="covoituragesGrid">
+                            <!-- Les cards seront chargées dynamiquement -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer__content">
+                <div class="footer__section footer__about">
+                    <h3 class="footer__logo">/COLLOCOV</h3>
+                    <p class="footer__description">
+                        La plateforme qui connecte les étudiants pour la colocation et le covoiturage. 
+                        Libère ton potentiel étudiant avec nous.
+                    </p>
+                </div>
+                <div class="footer__section">
+                    <h4 class="footer__title">Liens rapides</h4>
+                    <ul class="footer__links">
+                        <li><a href="index.html" class="footer__link">Acceuil</a></li>
+                        <li><a href="#" class="footer__link">À propos</a></li>
+                        <li><a href="#" class="footer__link">Contact</a></li>
+                        <li><a href="#" class="footer__link">Tarifs</a></li>
+                    </ul>
+                </div>
+                <div class="footer__section">
+                    <h4 class="footer__title">Services</h4>
+                    <ul class="footer__links">
+                        <li><a href="#" class="footer__link">Colocation Étudiante</a></li>
+                        <li><a href="#" class="footer__link">Covoiturage</a></li>
+                        <li><a href="urgence.html" class="footer__link">Urgence</a></li>
+                        <li><a href="#" class="footer__link">FAQ</a></li>
+                    </ul>
+                </div>
+                <div class="footer__section">
+                    <h4 class="footer__title">Contact</h4>
+                    <ul class="footer__links">
+                        <li><a href="mailto:contact@collocov.com" class="footer__link">contact@collocov.com</a></li>
+                        <li><a href="tel:+33123456789" class="footer__link">+33 1 23 45 67 89</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer__bottom">
+                <p class="footer__copyright">
+                    &copy; 2024 COLLOCOV. Tous droits réservés.
+                </p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    <script src="js/auth.js"></script>
+    <script src="js/main.js"></script>
+    <script>
+        // Données de covoiturages (simulées) avec coordonnées GPS
+        const covoituragesData = [
+            {
+                id: 1,
+                from: 'Ariana Soghra',
+                to: 'ESPRIT',
+                fromLat: 36.8625,
+                fromLng: 10.1956,
+                toLat: 36.8986,
+                toLng: 10.1875,
+                rides: [
+                    { driver: 'Jhon Doe', time: '17:00h', price: '9DT' },
+                    { driver: 'Jhon Doe', time: '17:00h', price: '9DT' },
+                    { driver: 'Jhon Doe', time: '17:00h', price: '9DT', selected: true }
+                ]
+            },
+            {
+                id: 2,
+                from: 'Tunis Centre',
+                to: 'Lac',
+                fromLat: 36.8065,
+                fromLng: 10.1815,
+                toLat: 36.8381,
+                toLng: 10.2408,
+                rides: [
+                    { driver: 'Marie Martin', time: '08:30h', price: '7DT' },
+                    { driver: 'Pierre Dupont', time: '09:00h', price: '8DT' },
+                    { driver: 'Sophie Bernard', time: '09:30h', price: '7DT', selected: true }
+                ]
+            },
+            {
+                id: 3,
+                from: 'Ariana',
+                to: 'Manouba',
+                fromLat: 36.8625,
+                fromLng: 10.1956,
+                toLat: 36.8078,
+                toLng: 10.0972,
+                rides: [
+                    { driver: 'Ahmed Ben Ali', time: '14:00h', price: '6DT' },
+                    { driver: 'Fatma Trabelsi', time: '14:30h', price: '6DT' },
+                    { driver: 'Mohamed Khelifi', time: '15:00h', price: '7DT', selected: true }
+                ]
+            }
+        ];
+
+        // Fonction pour initialiser une carte
+        function initMap(mapId, fromLat, fromLng, toLat, toLng, fromName, toName) {
+            const map = L.map(mapId, {
+                zoomControl: false,
+                attributionControl: false
+            }).setView([(fromLat + toLat) / 2, (fromLng + toLng) / 2], 12);
+
+            // Ajouter la couche de tuiles OpenStreetMap
+            L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                maxZoom: 19,
+                attribution: '© OpenStreetMap contributors'
+            }).addTo(map);
+
+            // Marqueur de départ
+            const startIcon = L.divIcon({
+                className: 'custom-marker custom-marker--start',
+                html: '<div class="marker-circle marker-circle--start"></div>',
+                iconSize: [16, 16],
+                iconAnchor: [8, 8]
+            });
+
+            // Marqueur d'arrivée
+            const endIcon = L.divIcon({
+                className: 'custom-marker custom-marker--end',
+                html: '<div class="marker-circle marker-circle--end"></div>',
+                iconSize: [16, 16],
+                iconAnchor: [8, 8]
+            });
+
+            // Ajouter les marqueurs
+            L.marker([fromLat, fromLng], { icon: startIcon }).addTo(map)
+                .bindPopup(`<strong>Départ:</strong> ${fromName}`);
+            
+            L.marker([toLat, toLng], { icon: endIcon }).addTo(map)
+                .bindPopup(`<strong>Arrivée:</strong> ${toName}`);
+
+            // Ajouter la ligne de route (simplifiée - ligne droite)
+            const routeLine = L.polyline(
+                [[fromLat, fromLng], [toLat, toLng]],
+                {
+                    color: '#111827',
+                    weight: 4,
+                    opacity: 0.8
+                }
+            ).addTo(map);
+
+            // Ajuster la vue pour afficher les deux points
+            const group = new L.featureGroup([routeLine]);
+            map.fitBounds(group.getBounds().pad(0.1));
+
+            // Ajouter les contrôles de zoom
+            L.control.zoom({
+                position: 'topleft'
+            }).addTo(map);
+
+            return map;
+        }
+
+        // Vérifier si l'utilisateur est connecté
+        document.addEventListener('DOMContentLoaded', function() {
+            const currentUser = isLoggedIn();
+            
+            if (!currentUser) {
+                alert('Vous devez être connecté pour accéder à cette page');
+                window.location.href = 'connexion.html';
+                return;
+            }
+            
+            // Mettre à jour l'image de profil avec le nom de l'utilisateur
+            const profileImg = document.getElementById('profileImg');
+            if (profileImg) {
+                const userName = currentUser.nom || 'User';
+                profileImg.src = `https://ui-avatars.com/api/?name=${encodeURIComponent(userName)}&background=3B82F6&color=fff&size=128`;
+            }
+            
+            // Mettre à jour l'image de profil dans la sidebar
+            const sidebarProfileImg = document.getElementById('sidebarProfileImg');
+            if (sidebarProfileImg) {
+                const userName = currentUser.nom || 'User';
+                sidebarProfileImg.src = `https://ui-avatars.com/api/?name=${encodeURIComponent(userName)}&background=3B82F6&color=fff&size=128`;
+            }
+            
+            // Afficher le nom de l'utilisateur dans la sidebar
+            const sidebarUserName = document.getElementById('sidebarUserName');
+            if (sidebarUserName) {
+                sidebarUserName.textContent = currentUser.nom;
+            }
+            
+            // Afficher le nom de l'utilisateur dans le dropdown
+            const dropdownUserName = document.getElementById('dropdownUserName');
+            if (dropdownUserName) {
+                dropdownUserName.textContent = currentUser.nom;
+            }
+            
+            // Gestion du menu déroulant du profil
+            const profileBtn = document.getElementById('profileBtn');
+            const profileDropdown = document.getElementById('profileDropdown');
+            
+            if (profileBtn && profileDropdown) {
+                profileBtn.addEventListener('click', function(e) {
+                    e.stopPropagation();
+                    profileDropdown.classList.toggle('active');
+                });
+                
+                // Fermer le menu en cliquant ailleurs
+                document.addEventListener('click', function(e) {
+                    if (!profileBtn.contains(e.target) && !profileDropdown.contains(e.target)) {
+                        profileDropdown.classList.remove('active');
+                    }
+                });
+            }
+
+            // Mettre en surbrillance l'élément actif dans la sidebar
+            const currentPage = window.location.pathname.split('/').pop() || 'covoiturages.html';
+            const navItems = document.querySelectorAll('.sidebar__nav-item');
+            navItems.forEach(item => {
+                const href = item.getAttribute('href');
+                if (href === currentPage) {
+                    item.classList.add('sidebar__nav-item--active');
+                }
+            });
+
+            // Afficher les cards de covoiturages
+            const covoituragesGrid = document.getElementById('covoituragesGrid');
+            if (covoituragesGrid) {
+                covoituragesGrid.innerHTML = covoituragesData.map(covoiturage => {
+                    const ridesHtml = covoiturage.rides.map((ride, index) => {
+                        const selectedClass = ride.selected ? 'ride-option--selected' : '';
+                        return `
+                            <div class="ride-option ${selectedClass}" data-ride-id="${covoiturage.id}-${index}">
+                                <span class="ride-driver">${ride.driver}</span>
+                                <span class="ride-time">${ride.time}</span>
+                                <span class="ride-price">${ride.price}</span>
+                            </div>
+                        `;
+                    }).join('');
+
+                    return `
+                        <div class="covoiturage-card" onclick="window.location.href='details-covoiturage.html?id=${covoiturage.id}'" style="cursor: pointer;">
+                            <div class="covoiturage-map">
+                                <div class="map-container" id="map-${covoiturage.id}"></div>
+                            </div>
+                            <div class="covoiturage-info">
+                                <div class="covoiturage-route">
+                                    <svg class="route-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                        <path d="M5 17H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2h-1"></path>
+                                        <polygon points="12 15 17 21 7 21 12 15"></polygon>
+                                    </svg>
+                                    <div class="route-details">
+                                        <p class="route-from">From: ${covoiturage.from}</p>
+                                        <p class="route-to">To: ${covoiturage.to}</p>
+                                    </div>
+                                </div>
+                                <a href="inbox.html" class="chat-link">Chat with this user</a>
+                            </div>
+                            <div class="covoiturage-rides">
+                                ${ridesHtml}
+                            </div>
+                            <div class="covoiturage-actions">
+                                ${(() => {
+                                    const selectedRide = covoiturage.rides.find(ride => ride.selected) || covoiturage.rides[0];
+                                    return `
+                                        <button class="btn btn--review-small" onclick="event.stopPropagation(); window.location.href='ecrire-review.html?driver=${encodeURIComponent(selectedRide.driver)}&covoiturageId=${covoiturage.id}&from=${encodeURIComponent(covoiturage.from)}&to=${encodeURIComponent(covoiturage.to)}'">
+                                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                                <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon>
+                                            </svg>
+                                            Écrire un avis pour ${selectedRide.driver}
+                                        </button>
+                                    `;
+                                })()}
+                            </div>
+                        </div>
+                    `;
+                }).join('');
+
+                // Initialiser les cartes après un court délai pour s'assurer que les éléments sont dans le DOM
+                setTimeout(() => {
+                    covoituragesData.forEach(covoiturage => {
+                        const mapElement = document.getElementById(`map-${covoiturage.id}`);
+                        if (mapElement) {
+                            initMap(
+                                `map-${covoiturage.id}`,
+                                covoiturage.fromLat,
+                                covoiturage.fromLng,
+                                covoiturage.toLat,
+                                covoiturage.toLng,
+                                covoiturage.from,
+                                covoiturage.to
+                            );
+                        }
+                    });
+                }, 100);
+
+                // Gestion des clics sur les options de trajet
+                document.querySelectorAll('.ride-option').forEach(option => {
+                    option.addEventListener('click', function(e) {
+                        e.stopPropagation(); // Empêcher la propagation vers la card
+                        // Retirer la sélection de toutes les options de cette card
+                        const card = this.closest('.covoiturage-card');
+                        card.querySelectorAll('.ride-option').forEach(opt => {
+                            opt.classList.remove('ride-option--selected');
+                        });
+                        // Ajouter la sélection à l'option cliquée
+                        this.classList.add('ride-option--selected');
+                    });
+                });
+
+                // Empêcher la redirection lors du clic sur le lien "Chat with this user"
+                document.querySelectorAll('.chat-link').forEach(link => {
+                    link.addEventListener('click', function(e) {
+                        e.stopPropagation();
+                    });
+                });
+            }
+
+            // Gestion de la recherche/filtre
+            const searchBtn = document.getElementById('searchBtn');
+            const searchFrom = document.getElementById('searchFrom');
+            const searchTo = document.getElementById('searchTo');
+            const searchDate = document.getElementById('searchDate');
+            const searchTime = document.getElementById('searchTime');
+
+            function filterCovoiturages() {
+                const fromValue = searchFrom.value.toLowerCase().trim();
+                const toValue = searchTo.value.toLowerCase().trim();
+                const dateValue = searchDate.value;
+                const timeValue = searchTime.value;
+
+                const cards = document.querySelectorAll('.covoiturage-card');
+                let visibleCount = 0;
+
+                cards.forEach(card => {
+                    const fromText = card.querySelector('.route-from').textContent.toLowerCase();
+                    const toText = card.querySelector('.route-to').textContent.toLowerCase();
+                    
+                    let shouldShow = true;
+
+                    if (fromValue && !fromText.includes(fromValue)) {
+                        shouldShow = false;
+                    }
+                    if (toValue && !toText.includes(toValue)) {
+                        shouldShow = false;
+                    }
+
+                    if (shouldShow) {
+                        card.style.display = 'block';
+                        visibleCount++;
+                    } else {
+                        card.style.display = 'none';
+                    }
+                });
+
+                // Afficher un message si aucun résultat
+                if (visibleCount === 0) {
+                    const grid = document.getElementById('covoituragesGrid');
+                    if (!grid.querySelector('.no-results')) {
+                        const noResults = document.createElement('div');
+                        noResults.className = 'no-results';
+                        noResults.innerHTML = `
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <circle cx="11" cy="11" r="8"></circle>
+                                <path d="m21 21-4.35-4.35"></path>
+                            </svg>
+                            <p>Aucun covoiturage trouvé</p>
+                        `;
+                        grid.appendChild(noResults);
+                    }
+                } else {
+                    const noResults = grid.querySelector('.no-results');
+                    if (noResults) {
+                        noResults.remove();
+                    }
+                }
+            }
+
+            if (searchBtn) {
+                searchBtn.addEventListener('click', filterCovoiturages);
+            }
+
+            // Recherche en temps réel lors de la saisie
+            if (searchFrom) {
+                searchFrom.addEventListener('keyup', function(e) {
+                    if (e.key === 'Enter') {
+                        filterCovoiturages();
+                    }
+                });
+            }
+
+            if (searchTo) {
+                searchTo.addEventListener('keyup', function(e) {
+                    if (e.key === 'Enter') {
+                        filterCovoiturages();
+                    }
+                });
+            }
+        });
+    </script>
+</body>
+</html>
+

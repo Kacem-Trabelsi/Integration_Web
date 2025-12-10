@@ -1,0 +1,462 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Notifications - COLLOCOV">
+    <title>Notifications - COLLOCOV</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="dist/css/main.css">
+</head>
+<body>
+    <!-- Header Navigation -->
+    <header class="header">
+        <nav class="nav container">
+            <div class="nav__logo">
+                <a href="index.html" class="logo-link">/COLLOCOV</a>
+            </div>
+            <ul class="nav__menu">
+                <li class="nav__item"><a href="index.html" class="nav__link">Acceuil</a></li>
+                <li class="nav__item"><a href="contact.html" class="nav__link">Contact</a></li>
+                <li class="nav__item"><a href="urgence.html" class="nav__link">urgence</a></li>
+            </ul>
+            <div class="nav__actions">
+                <div class="nav__profile">
+                    <button class="nav__profile-btn" id="profileBtn" aria-label="Menu profil">
+                        <img src="https://ui-avatars.com/api/?name=User&background=3B82F6&color=fff&size=128" alt="Profile" class="nav__profile-img" id="profileImg">
+                    </button>
+                    <div class="nav__dropdown" id="profileDropdown">
+                        <a href="#" class="nav__dropdown-item" onclick="window.location.href='profile.html'; return false;">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                                <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+                                <circle cx="12" cy="7" r="4"></circle>
+                            </svg>
+                            My profile
+                        </a>
+                        <div class="nav__dropdown-divider"></div>
+                        <div class="nav__dropdown-user" id="dropdownUserName"></div>
+                        <button class="nav__dropdown-item nav__dropdown-item--logout" onclick="logoutUser()">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                                <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path>
+                                <polyline points="16 17 21 12 16 7"></polyline>
+                                <line x1="21" y1="12" x2="9" y2="12"></line>
+                            </svg>
+                            Déconnexion
+                        </button>
+                    </div>
+                </div>
+            </div>
+            <button class="nav__toggle" aria-label="Toggle menu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+        </nav>
+    </header>
+
+    <!-- Main Content -->
+    <main class="main">
+        <div class="dashboard-layout">
+            <!-- Sidebar Navigation -->
+            <aside class="sidebar">
+                <div class="sidebar__header">
+                    <div class="sidebar__user">
+                        <img src="https://ui-avatars.com/api/?name=User&background=3B82F6&color=fff&size=128" alt="Profile" class="sidebar__user-img" id="sidebarProfileImg">
+                        <span class="sidebar__user-name" id="sidebarUserName">Utilisateur</span>
+                    </div>
+                    <div class="sidebar__icons">
+                        <button class="sidebar__icon-btn" id="messagesBtn" aria-label="Messages" onclick="window.location.href='inbox.html'">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>
+                            </svg>
+                            <span class="sidebar__icon-badge" id="messagesBadge">0</span>
+                        </button>
+                        <button class="sidebar__icon-btn sidebar__icon-btn--active" id="notificationsBtn" aria-label="Notifications" onclick="window.location.href='notifications.html'">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"></path>
+                                <path d="M13.73 21a2 2 0 0 1-3.46 0"></path>
+                            </svg>
+                            <span class="sidebar__icon-badge" id="notificationsBadge">5</span>
+                        </button>
+                    </div>
+                </div>
+                <nav class="sidebar__nav">
+                    <a href="dashboard.html" class="sidebar__nav-item">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <rect x="3" y="3" width="7" height="7"></rect>
+                            <rect x="14" y="3" width="7" height="7"></rect>
+                            <rect x="14" y="14" width="7" height="7"></rect>
+                            <rect x="3" y="14" width="7" height="7"></rect>
+                        </svg>
+                        <span>Tableau de bord</span>
+                    </a>
+                    <a href="covoiturages.html" class="sidebar__nav-item">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M5 17H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2h-1"></path>
+                            <polygon points="12 15 17 21 7 21 12 15"></polygon>
+                        </svg>
+                        <span>Liste des covoiturages</span>
+                    </a>
+                    <a href="colocations.html" class="sidebar__nav-item">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
+                            <polyline points="9 22 9 12 15 12 15 22"></polyline>
+                        </svg>
+                        <span>Liste des colocations</span>
+                    </a>
+                    <a href="profile.html" class="sidebar__nav-item">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+                            <circle cx="12" cy="7" r="4"></circle>
+                        </svg>
+                        <span>My profile</span>
+                    </a>
+                    <a href="reviews.html" class="sidebar__nav-item">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon>
+                        </svg>
+                        <span>Liste des reviews</span>
+                    </a>
+                </nav>
+            </aside>
+
+            <!-- Notifications Content -->
+            <div class="dashboard-main">
+                <div class="container">
+                    <div class="notifications-section">
+                        <h1 class="notifications-title">Notifications</h1>
+                        
+                        <!-- Filter Tabs -->
+                        <div class="notifications-filters">
+                            <button class="filter-btn filter-btn--active" data-filter="all">Tout</button>
+                            <button class="filter-btn" data-filter="new">Nouveaux</button>
+                            <button class="filter-btn" data-filter="unread">Non lues</button>
+                            <button class="filter-btn" data-filter="read">Lues</button>
+                        </div>
+
+                        <!-- Notifications List -->
+                        <div class="notifications-list" id="notificationsList">
+                            <!-- Les notifications seront chargées dynamiquement -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer__content">
+                <div class="footer__section footer__about">
+                    <h3 class="footer__logo">/COLLOCOV</h3>
+                    <p class="footer__description">
+                        La plateforme qui connecte les étudiants pour la colocation et le covoiturage. 
+                        Libère ton potentiel étudiant avec nous.
+                    </p>
+                </div>
+                <div class="footer__section">
+                    <h4 class="footer__title">Liens rapides</h4>
+                    <ul class="footer__links">
+                        <li><a href="index.html" class="footer__link">Acceuil</a></li>
+                        <li><a href="#" class="footer__link">À propos</a></li>
+                        <li><a href="#" class="footer__link">Contact</a></li>
+                        <li><a href="#" class="footer__link">Tarifs</a></li>
+                    </ul>
+                </div>
+                <div class="footer__section">
+                    <h4 class="footer__title">Services</h4>
+                    <ul class="footer__links">
+                        <li><a href="#" class="footer__link">Colocation Étudiante</a></li>
+                        <li><a href="#" class="footer__link">Covoiturage</a></li>
+                        <li><a href="urgence.html" class="footer__link">Urgence</a></li>
+                        <li><a href="#" class="footer__link">FAQ</a></li>
+                    </ul>
+                </div>
+                <div class="footer__section">
+                    <h4 class="footer__title">Contact</h4>
+                    <ul class="footer__links">
+                        <li><a href="mailto:contact@collocov.com" class="footer__link">contact@collocov.com</a></li>
+                        <li><a href="tel:+33123456789" class="footer__link">+33 1 23 45 67 89</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer__bottom">
+                <p class="footer__copyright">
+                    &copy; 2024 COLLOCOV. Tous droits réservés.
+                </p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="js/auth.js"></script>
+    <script src="js/main.js"></script>
+    <script>
+        // Données de notifications (simulées)
+        const notificationsData = [
+            {
+                id: 1,
+                type: 'message',
+                title: 'Nouveau message',
+                message: 'Marie Martin vous a envoyé un message concernant votre annonce de colocation',
+                time: 'Il y a 5 minutes',
+                isRead: false,
+                isNew: true,
+                icon: 'message'
+            },
+            {
+                id: 2,
+                type: 'colocation',
+                title: 'Nouvelle demande',
+                message: 'Jean Dupont est intéressé par votre colocation',
+                time: 'Il y a 1 heure',
+                isRead: false,
+                isNew: true,
+                icon: 'home'
+            },
+            {
+                id: 3,
+                type: 'covoiturage',
+                title: 'Réservation confirmée',
+                message: 'Votre trajet Paris-Lyon du 15 mars a été réservé par Sophie Martin',
+                time: 'Il y a 2 heures',
+                isRead: true,
+                isNew: false,
+                icon: 'car'
+            },
+            {
+                id: 4,
+                type: 'system',
+                title: 'Mise à jour du profil',
+                message: 'Votre profil a été mis à jour avec succès',
+                time: 'Hier',
+                isRead: true,
+                isNew: false,
+                icon: 'check'
+            },
+            {
+                id: 5,
+                type: 'message',
+                title: 'Nouveau message',
+                message: 'Pierre Durand vous a contacté pour un covoiturage',
+                time: 'Il y a 3 jours',
+                isRead: false,
+                isNew: false,
+                icon: 'message'
+            },
+            {
+                id: 6,
+                type: 'colocation',
+                title: 'Visite programmée',
+                message: 'La visite de votre colocation est prévue demain à 15h',
+                time: 'Il y a 4 jours',
+                isRead: true,
+                isNew: false,
+                icon: 'calendar'
+            }
+        ];
+
+        // Vérifier si l'utilisateur est connecté
+        document.addEventListener('DOMContentLoaded', function() {
+            const currentUser = isLoggedIn();
+            
+            if (!currentUser) {
+                alert('Vous devez être connecté pour accéder à cette page');
+                window.location.href = 'connexion.html';
+                return;
+            }
+            
+            // Mettre à jour l'image de profil avec le nom de l'utilisateur
+            const profileImg = document.getElementById('profileImg');
+            if (profileImg) {
+                const userName = currentUser.nom || 'User';
+                profileImg.src = `https://ui-avatars.com/api/?name=${encodeURIComponent(userName)}&background=3B82F6&color=fff&size=128`;
+            }
+            
+            // Mettre à jour l'image de profil dans la sidebar
+            const sidebarProfileImg = document.getElementById('sidebarProfileImg');
+            if (sidebarProfileImg) {
+                const userName = currentUser.nom || 'User';
+                sidebarProfileImg.src = `https://ui-avatars.com/api/?name=${encodeURIComponent(userName)}&background=3B82F6&color=fff&size=128`;
+            }
+            
+            // Afficher le nom de l'utilisateur dans la sidebar
+            const sidebarUserName = document.getElementById('sidebarUserName');
+            if (sidebarUserName) {
+                sidebarUserName.textContent = currentUser.nom;
+            }
+            
+            // Afficher le nom de l'utilisateur dans le dropdown
+            const dropdownUserName = document.getElementById('dropdownUserName');
+            if (dropdownUserName) {
+                dropdownUserName.textContent = currentUser.nom;
+            }
+            
+            // Gestion du menu déroulant du profil
+            const profileBtn = document.getElementById('profileBtn');
+            const profileDropdown = document.getElementById('profileDropdown');
+            
+            if (profileBtn && profileDropdown) {
+                profileBtn.addEventListener('click', function(e) {
+                    e.stopPropagation();
+                    profileDropdown.classList.toggle('active');
+                });
+                
+                // Fermer le menu en cliquant ailleurs
+                document.addEventListener('click', function(e) {
+                    if (!profileBtn.contains(e.target) && !profileDropdown.contains(e.target)) {
+                        profileDropdown.classList.remove('active');
+                    }
+                });
+            }
+
+            // Gestion des filtres
+            const filterButtons = document.querySelectorAll('.filter-btn');
+            const notificationsList = document.getElementById('notificationsList');
+            let currentFilter = 'all';
+
+            // Fonction pour obtenir l'icône SVG selon le type
+            function getNotificationIcon(type) {
+                const icons = {
+                    message: '<path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>',
+                    colocation: '<path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path><polyline points="9 22 9 12 15 12 15 22"></polyline>',
+                    covoiturage: '<path d="M5 17H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2h-1"></path><polygon points="12 15 17 21 7 21 12 15"></polygon>',
+                    system: '<polyline points="20 6 9 17 4 12"></polyline>',
+                    calendar: '<rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line>',
+                    check: '<polyline points="20 6 9 17 4 12"></polyline>'
+                };
+                return icons[type] || icons.system;
+            }
+
+            // Fonction pour obtenir la couleur selon le type
+            function getNotificationColor(type) {
+                const colors = {
+                    message: '#3B82F6',
+                    colocation: '#10B981',
+                    covoiturage: '#F59E0B',
+                    system: '#6B7280',
+                    calendar: '#8B5CF6',
+                    check: '#10B981'
+                };
+                return colors[type] || colors.system;
+            }
+
+            // Fonction pour afficher les notifications
+            function displayNotifications(filter) {
+                let filteredNotifications = notificationsData;
+
+                switch(filter) {
+                    case 'new':
+                        filteredNotifications = notificationsData.filter(n => n.isNew);
+                        break;
+                    case 'unread':
+                        filteredNotifications = notificationsData.filter(n => !n.isRead);
+                        break;
+                    case 'read':
+                        filteredNotifications = notificationsData.filter(n => n.isRead);
+                        break;
+                    default:
+                        filteredNotifications = notificationsData;
+                }
+
+                if (filteredNotifications.length === 0) {
+                    notificationsList.innerHTML = `
+                        <div class="notifications-empty">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"></path>
+                                <path d="M13.73 21a2 2 0 0 1-3.46 0"></path>
+                            </svg>
+                            <p>Aucune notification</p>
+                        </div>
+                    `;
+                    return;
+                }
+
+                notificationsList.innerHTML = filteredNotifications.map(notification => {
+                    const iconColor = getNotificationColor(notification.icon);
+                    const iconPath = getNotificationIcon(notification.icon);
+                    const unreadClass = !notification.isRead ? 'notification-item--unread' : '';
+                    const newBadge = notification.isNew ? '<span class="notification-badge-new">Nouveau</span>' : '';
+
+                    return `
+                        <div class="notification-item ${unreadClass}" data-id="${notification.id}">
+                            <div class="notification-icon" style="background-color: ${iconColor}20; color: ${iconColor};">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    ${iconPath}
+                                </svg>
+                            </div>
+                            <div class="notification-content">
+                                <div class="notification-header">
+                                    <h3 class="notification-title">${notification.title} ${newBadge}</h3>
+                                    <span class="notification-time">${notification.time}</span>
+                                </div>
+                                <p class="notification-message">${notification.message}</p>
+                            </div>
+                            ${!notification.isRead ? '<div class="notification-dot"></div>' : ''}
+                        </div>
+                    `;
+                }).join('');
+
+                // Ajouter les event listeners pour marquer comme lu
+                document.querySelectorAll('.notification-item').forEach(item => {
+                    item.addEventListener('click', function() {
+                        const notificationId = parseInt(this.dataset.id);
+                        const notification = notificationsData.find(n => n.id === notificationId);
+                        if (notification && !notification.isRead) {
+                            notification.isRead = true;
+                            notification.isNew = false;
+                            displayNotifications(currentFilter);
+                            updateBadgeCount();
+                        }
+                    });
+                });
+            }
+
+            // Fonction pour mettre à jour le badge de notification
+            function updateBadgeCount() {
+                const unreadCount = notificationsData.filter(n => !n.isRead).length;
+                const badge = document.getElementById('notificationsBadge');
+                if (badge) {
+                    badge.textContent = unreadCount;
+                    if (unreadCount === 0) {
+                        badge.style.display = 'none';
+                    } else {
+                        badge.style.display = 'block';
+                    }
+                }
+            }
+
+            // Gestion des filtres
+            filterButtons.forEach(btn => {
+                btn.addEventListener('click', function() {
+                    // Retirer la classe active de tous les boutons
+                    filterButtons.forEach(b => b.classList.remove('filter-btn--active'));
+                    // Ajouter la classe active au bouton cliqué
+                    this.classList.add('filter-btn--active');
+                    // Mettre à jour le filtre actif
+                    currentFilter = this.dataset.filter;
+                    // Afficher les notifications filtrées
+                    displayNotifications(currentFilter);
+                });
+            });
+
+            // Afficher toutes les notifications au chargement
+            displayNotifications('all');
+            updateBadgeCount();
+
+            // Mettre en surbrillance l'élément actif dans la sidebar
+            const currentPage = window.location.pathname.split('/').pop() || 'notifications.html';
+            const navItems = document.querySelectorAll('.sidebar__nav-item');
+            navItems.forEach(item => {
+                const href = item.getAttribute('href');
+                if (href === currentPage) {
+                    item.classList.add('sidebar__nav-item--active');
+                }
+            });
+        });
+    </script>
+</body>
+</html>
+
