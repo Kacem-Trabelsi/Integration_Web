@@ -1,0 +1,419 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Proposer un trajet - COLLOCOV">
+    <title>Proposer un trajet - COLLOCOV</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+    <link rel="stylesheet" href="dist/css/main.css">
+    <style>
+        .leaflet-container {
+            font-family: 'Inter', sans-serif;
+        }
+    </style>
+</head>
+<body>
+    <!-- Header Navigation -->
+    <header class="header">
+        <nav class="nav container">
+            <div class="nav__logo">
+                <a href="index.html" class="logo-link">/COLLOCOV</a>
+            </div>
+            <ul class="nav__menu">
+                <li class="nav__item"><a href="index.html" class="nav__link">Acceuil</a></li>
+                <li class="nav__item"><a href="contact.html" class="nav__link">Contact</a></li>
+                <li class="nav__item"><a href="urgence.html" class="nav__link">urgence</a></li>
+            </ul>
+            <div class="nav__actions">
+                <div class="nav__profile">
+                    <button class="nav__profile-btn" id="profileBtn" aria-label="Menu profil">
+                        <img src="https://ui-avatars.com/api/?name=User&background=3B82F6&color=fff&size=128" alt="Profile" class="nav__profile-img" id="profileImg">
+                    </button>
+                    <div class="nav__dropdown" id="profileDropdown">
+                        <a href="#" class="nav__dropdown-item" onclick="window.location.href='profile.html'; return false;">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                                <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+                                <circle cx="12" cy="7" r="4"></circle>
+                            </svg>
+                            My profile
+                        </a>
+                        <div class="nav__dropdown-divider"></div>
+                        <div class="nav__dropdown-user" id="dropdownUserName"></div>
+                        <button class="nav__dropdown-item nav__dropdown-item--logout" onclick="logoutUser()">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                                <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path>
+                                <polyline points="16 17 21 12 16 7"></polyline>
+                                <line x1="21" y1="12" x2="9" y2="12"></line>
+                            </svg>
+                            Déconnexion
+                        </button>
+                    </div>
+                </div>
+            </div>
+            <button class="nav__toggle" aria-label="Toggle menu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+        </nav>
+    </header>
+
+    <!-- Main Content -->
+    <main class="main">
+        <div class="dashboard-layout">
+            <!-- Sidebar Navigation -->
+            <aside class="sidebar">
+                <div class="sidebar__header">
+                    <div class="sidebar__user">
+                        <img src="https://ui-avatars.com/api/?name=User&background=3B82F6&color=fff&size=128" alt="Profile" class="sidebar__user-img" id="sidebarProfileImg">
+                        <span class="sidebar__user-name" id="sidebarUserName">Utilisateur</span>
+                    </div>
+                    <div class="sidebar__icons">
+                        <button class="sidebar__icon-btn" id="messagesBtn" aria-label="Messages" onclick="window.location.href='inbox.html'">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>
+                            </svg>
+                            <span class="sidebar__icon-badge" id="messagesBadge">0</span>
+                        </button>
+                        <button class="sidebar__icon-btn" id="notificationsBtn" aria-label="Notifications" onclick="window.location.href='notifications.html'">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"></path>
+                                <path d="M13.73 21a2 2 0 0 1-3.46 0"></path>
+                            </svg>
+                            <span class="sidebar__icon-badge" id="notificationsBadge">0</span>
+                        </button>
+                    </div>
+                </div>
+                <nav class="sidebar__nav">
+                    <a href="dashboard.html" class="sidebar__nav-item">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <rect x="3" y="3" width="7" height="7"></rect>
+                            <rect x="14" y="3" width="7" height="7"></rect>
+                            <rect x="14" y="14" width="7" height="7"></rect>
+                            <rect x="3" y="14" width="7" height="7"></rect>
+                        </svg>
+                        <span>Tableau de bord</span>
+                    </a>
+                    <a href="covoiturages.html" class="sidebar__nav-item">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M5 17H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2h-1"></path>
+                            <polygon points="12 15 17 21 7 21 12 15"></polygon>
+                        </svg>
+                        <span>Liste des covoiturages</span>
+                    </a>
+                    <a href="colocations.html" class="sidebar__nav-item">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
+                            <polyline points="9 22 9 12 15 12 15 22"></polyline>
+                        </svg>
+                        <span>Liste des colocations</span>
+                    </a>
+                    <a href="profile.html" class="sidebar__nav-item">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+                            <circle cx="12" cy="7" r="4"></circle>
+                        </svg>
+                        <span>My profile</span>
+                    </a>
+                    <a href="reviews.html" class="sidebar__nav-item">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon>
+                        </svg>
+                        <span>Liste des reviews</span>
+                    </a>
+                </nav>
+            </aside>
+
+            <!-- Proposer Trajet Content -->
+            <div class="dashboard-main">
+                <div class="container">
+                    <div class="proposer-trajet-section">
+                        <h1 class="proposer-trajet-title">Proposer un trajet</h1>
+                        
+                        <form class="proposer-trajet-form" id="proposerTrajetForm">
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label for="depart" class="form-label">Lieu de départ *</label>
+                                    <input type="text" id="depart" name="depart" class="form-input" placeholder="Ex: Ariana Soghra" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="destination" class="form-label">Destination *</label>
+                                    <input type="text" id="destination" name="destination" class="form-input" placeholder="Ex: ESPRIT" required>
+                                </div>
+                            </div>
+
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label for="date" class="form-label">Date *</label>
+                                    <input type="date" id="date" name="date" class="form-input" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="heure" class="form-label">Heure de départ *</label>
+                                    <input type="time" id="heure" name="heure" class="form-input" required>
+                                </div>
+                            </div>
+
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label for="prix" class="form-label">Prix par passager (DT) *</label>
+                                    <input type="number" id="prix" name="prix" class="form-input" placeholder="Ex: 9" min="1" step="0.5" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="places" class="form-label">Nombre de places disponibles *</label>
+                                    <input type="number" id="places" name="places" class="form-input" placeholder="Ex: 3" min="1" max="8" required>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="description" class="form-label">Description (optionnel)</label>
+                                <textarea id="description" name="description" class="form-textarea" rows="4" placeholder="Ajoutez des détails sur votre trajet..."></textarea>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="form-label">Itinéraire sur la carte</label>
+                                <div class="map-container-form" id="mapForm"></div>
+                                <p class="form-hint">Cliquez sur la carte pour définir votre itinéraire</p>
+                            </div>
+
+                            <div class="form-actions">
+                                <button type="button" class="btn btn--outline" onclick="window.location.href='covoiturages.html'">Annuler</button>
+                                <button type="submit" class="btn btn--primary">
+                                    <span class="btn__icon-circle">
+                                        <img src="image/image 1.png" alt="Car icon" class="btn__car-icon">
+                                    </span>
+                                    Publier le trajet
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer__content">
+                <div class="footer__section footer__about">
+                    <h3 class="footer__logo">/COLLOCOV</h3>
+                    <p class="footer__description">
+                        La plateforme qui connecte les étudiants pour la colocation et le covoiturage. 
+                        Libère ton potentiel étudiant avec nous.
+                    </p>
+                </div>
+                <div class="footer__section">
+                    <h4 class="footer__title">Liens rapides</h4>
+                    <ul class="footer__links">
+                        <li><a href="index.html" class="footer__link">Acceuil</a></li>
+                        <li><a href="#" class="footer__link">À propos</a></li>
+                        <li><a href="#" class="footer__link">Contact</a></li>
+                        <li><a href="#" class="footer__link">Tarifs</a></li>
+                    </ul>
+                </div>
+                <div class="footer__section">
+                    <h4 class="footer__title">Services</h4>
+                    <ul class="footer__links">
+                        <li><a href="#" class="footer__link">Colocation Étudiante</a></li>
+                        <li><a href="#" class="footer__link">Covoiturage</a></li>
+                        <li><a href="urgence.html" class="footer__link">Urgence</a></li>
+                        <li><a href="#" class="footer__link">FAQ</a></li>
+                    </ul>
+                </div>
+                <div class="footer__section">
+                    <h4 class="footer__title">Contact</h4>
+                    <ul class="footer__links">
+                        <li><a href="mailto:contact@collocov.com" class="footer__link">contact@collocov.com</a></li>
+                        <li><a href="tel:+33123456789" class="footer__link">+33 1 23 45 67 89</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer__bottom">
+                <p class="footer__copyright">
+                    &copy; 2024 COLLOCOV. Tous droits réservés.
+                </p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    <script src="js/auth.js"></script>
+    <script src="js/main.js"></script>
+    <script>
+        let map;
+        let startMarker = null;
+        let endMarker = null;
+        let routeLine = null;
+
+        // Vérifier si l'utilisateur est connecté
+        document.addEventListener('DOMContentLoaded', function() {
+            const currentUser = isLoggedIn();
+            
+            if (!currentUser) {
+                alert('Vous devez être connecté pour proposer un trajet');
+                window.location.href = 'connexion.html';
+                return;
+            }
+            
+            // Mettre à jour l'image de profil avec le nom de l'utilisateur
+            const profileImg = document.getElementById('profileImg');
+            if (profileImg) {
+                const userName = currentUser.nom || 'User';
+                profileImg.src = `https://ui-avatars.com/api/?name=${encodeURIComponent(userName)}&background=3B82F6&color=fff&size=128`;
+            }
+            
+            // Mettre à jour l'image de profil dans la sidebar
+            const sidebarProfileImg = document.getElementById('sidebarProfileImg');
+            if (sidebarProfileImg) {
+                const userName = currentUser.nom || 'User';
+                sidebarProfileImg.src = `https://ui-avatars.com/api/?name=${encodeURIComponent(userName)}&background=3B82F6&color=fff&size=128`;
+            }
+            
+            // Afficher le nom de l'utilisateur dans la sidebar
+            const sidebarUserName = document.getElementById('sidebarUserName');
+            if (sidebarUserName) {
+                sidebarUserName.textContent = currentUser.nom;
+            }
+            
+            // Afficher le nom de l'utilisateur dans le dropdown
+            const dropdownUserName = document.getElementById('dropdownUserName');
+            if (dropdownUserName) {
+                dropdownUserName.textContent = currentUser.nom;
+            }
+            
+            // Gestion du menu déroulant du profil
+            const profileBtn = document.getElementById('profileBtn');
+            const profileDropdown = document.getElementById('profileDropdown');
+            
+            if (profileBtn && profileDropdown) {
+                profileBtn.addEventListener('click', function(e) {
+                    e.stopPropagation();
+                    profileDropdown.classList.toggle('active');
+                });
+                
+                // Fermer le menu en cliquant ailleurs
+                document.addEventListener('click', function(e) {
+                    if (!profileBtn.contains(e.target) && !profileDropdown.contains(e.target)) {
+                        profileDropdown.classList.remove('active');
+                    }
+                });
+            }
+
+            // Initialiser la carte
+            map = L.map('mapForm').setView([36.8065, 10.1815], 11);
+
+            L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                maxZoom: 19,
+                attribution: '© OpenStreetMap contributors'
+            }).addTo(map);
+
+            // Gestion des clics sur la carte
+            map.on('click', function(e) {
+                const lat = e.latlng.lat;
+                const lng = e.latlng.lng;
+
+                if (!startMarker) {
+                    // Premier clic = point de départ
+                    const startIcon = L.divIcon({
+                        className: 'custom-marker custom-marker--start',
+                        html: '<div class="marker-circle marker-circle--start"></div>',
+                        iconSize: [16, 16],
+                        iconAnchor: [8, 8]
+                    });
+                    startMarker = L.marker([lat, lng], { icon: startIcon, draggable: true }).addTo(map);
+                    startMarker.bindPopup('Point de départ').openPopup();
+                } else if (!endMarker) {
+                    // Deuxième clic = point d'arrivée
+                    const endIcon = L.divIcon({
+                        className: 'custom-marker custom-marker--end',
+                        html: '<div class="marker-circle marker-circle--end"></div>',
+                        iconSize: [16, 16],
+                        iconAnchor: [8, 8]
+                    });
+                    endMarker = L.marker([lat, lng], { icon: endIcon, draggable: true }).addTo(map);
+                    endMarker.bindPopup('Point d\'arrivée').openPopup();
+                    
+                    // Dessiner la ligne de route
+                    updateRoute();
+                } else {
+                    // Réinitialiser
+                    map.removeLayer(startMarker);
+                    map.removeLayer(endMarker);
+                    if (routeLine) map.removeLayer(routeLine);
+                    startMarker = null;
+                    endMarker = null;
+                    routeLine = null;
+                }
+            });
+
+            // Fonction pour mettre à jour la ligne de route
+            function updateRoute() {
+                if (startMarker && endMarker) {
+                    if (routeLine) {
+                        map.removeLayer(routeLine);
+                    }
+                    routeLine = L.polyline(
+                        [startMarker.getLatLng(), endMarker.getLatLng()],
+                        {
+                            color: '#111827',
+                            weight: 4,
+                            opacity: 0.8
+                        }
+                    ).addTo(map);
+                    
+                    const group = new L.featureGroup([startMarker, endMarker, routeLine]);
+                    map.fitBounds(group.getBounds().pad(0.1));
+                }
+            }
+
+            // Gestion de la soumission du formulaire
+            const form = document.getElementById('proposerTrajetForm');
+            form.addEventListener('submit', function(e) {
+                e.preventDefault();
+                
+                if (!startMarker || !endMarker) {
+                    alert('Veuillez définir votre itinéraire sur la carte en cliquant deux fois (départ et arrivée)');
+                    return;
+                }
+
+                const formData = {
+                    depart: document.getElementById('depart').value,
+                    destination: document.getElementById('destination').value,
+                    date: document.getElementById('date').value,
+                    heure: document.getElementById('heure').value,
+                    prix: document.getElementById('prix').value,
+                    places: document.getElementById('places').value,
+                    description: document.getElementById('description').value,
+                    fromLat: startMarker.getLatLng().lat,
+                    fromLng: startMarker.getLatLng().lng,
+                    toLat: endMarker.getLatLng().lat,
+                    toLng: endMarker.getLatLng().lng
+                };
+
+                // Sauvegarder dans localStorage (simulation)
+                const trajets = JSON.parse(localStorage.getItem('trajets') || '[]');
+                trajets.push({
+                    id: Date.now(),
+                    ...formData,
+                    driver: currentUser.nom,
+                    createdAt: new Date().toISOString()
+                });
+                localStorage.setItem('trajets', JSON.stringify(trajets));
+
+                alert('Votre trajet a été publié avec succès !');
+                window.location.href = 'covoiturages.html';
+            });
+
+            // Définir la date minimale à aujourd'hui
+            const dateInput = document.getElementById('date');
+            const today = new Date().toISOString().split('T')[0];
+            dateInput.setAttribute('min', today);
+        });
+    </script>
+</body>
+</html>
+
