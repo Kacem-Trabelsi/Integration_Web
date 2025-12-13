@@ -186,7 +186,47 @@
         </div>
     </footer>
 
+    <script src="js/auth.js"></script>
     <script src="js/main.js"></script>
+    <script>
+        // Gestion du formulaire d'inscription
+        document.addEventListener('DOMContentLoaded', function() {
+            const form = document.querySelector('.signup-form');
+            
+            if (form) {
+                form.addEventListener('submit', function(e) {
+                    e.preventDefault();
+                    
+                    const nom = document.getElementById('nom').value;
+                    const email = document.getElementById('email').value;
+                    const telephone = document.getElementById('telephone').value;
+                    const password = document.getElementById('password').value;
+                    const confirmPassword = document.getElementById('confirm-password').value;
+                    
+                    // Validation
+                    if (password !== confirmPassword) {
+                        alert('Les mots de passe ne correspondent pas');
+                        return;
+                    }
+                    
+                    if (password.length < 8) {
+                        alert('Le mot de passe doit contenir au moins 8 caractères');
+                        return;
+                    }
+                    
+                    // Créer l'utilisateur
+                    const result = createUser(nom, email, telephone, password);
+                    
+                    if (result.success) {
+                        alert('Compte créé avec succès ! Redirection vers la page de connexion...');
+                        window.location.href = 'connexion.html';
+                    } else {
+                        alert(result.message);
+                    }
+                });
+            }
+        });
+    </script>
 </body>
 </html>
 

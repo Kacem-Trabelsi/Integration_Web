@@ -174,7 +174,33 @@
         </div>
     </footer>
 
+    <script src="js/auth.js"></script>
     <script src="js/main.js"></script>
+    <script>
+        // Gestion du formulaire de connexion
+        document.addEventListener('DOMContentLoaded', function() {
+            const form = document.querySelector('.login-form');
+            
+            if (form) {
+                form.addEventListener('submit', function(e) {
+                    e.preventDefault();
+                    
+                    const email = document.getElementById('login-email').value;
+                    const password = document.getElementById('login-password').value;
+                    
+                    // Connecter l'utilisateur
+                    const result = loginUser(email, password);
+                    
+                    if (result.success) {
+                        alert('Connexion réussie ! Redirection...');
+                        window.location.href = 'dashboard.html';
+                    } else {
+                        alert(result.message);
+                    }
+                });
+            }
+        });
+    </script>
 </body>
 </html>
 
