@@ -1,0 +1,1178 @@
+// Variables SASS
+$primary-blue: #2563eb;
+$dark-blue: #1e40af;
+$light-blue: #dbeafe;
+$yellow: #fbbf24;
+$green: #10b981;
+$light-green: #d1fae5;
+$white: #ffffff;
+$dark-gray: #4a5568;
+$light-gray: #e2e8f0;
+$text-dark: #1e293b;
+
+// Mixins
+@mixin flex-center {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+@mixin flex-between {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+@mixin flex-column {
+  display: flex;
+  flex-direction: column;
+}
+
+@mixin container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 1.5rem;
+}
+
+// Reset & Base Styles
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+  color: $text-dark;
+  line-height: 1.6;
+  overflow-x: hidden;
+}
+
+.container {
+  @include container;
+}
+
+// Header Styles
+.header {
+  background-color: $white;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+}
+
+.nav {
+  @include flex-between;
+  padding: 1rem 1.5rem;
+  min-height: 70px;
+
+  &__logo {
+    .logo-link {
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: #111827;
+      text-decoration: none;
+      letter-spacing: -0.5px;
+    }
+  }
+
+  &__menu {
+    @include flex-center;
+    list-style: none;
+    gap: 2rem;
+  }
+
+  &__link {
+    color: #111827;
+    text-decoration: none;
+    font-weight: 500;
+    transition: color 0.3s ease;
+
+    &:hover {
+      color: $primary-blue;
+    }
+  }
+
+  &__actions {
+    @include flex-center;
+    gap: 1rem;
+  }
+
+  &__toggle {
+    display: none;
+    flex-direction: column;
+    background: none;
+    border: none;
+    cursor: pointer;
+    gap: 4px;
+
+    span {
+      width: 25px;
+      height: 3px;
+      background-color: $dark-blue;
+      transition: all 0.3s ease;
+    }
+  }
+}
+
+// Button Styles
+.btn {
+  padding: 0.75rem 1.5rem;
+  border-radius: 8px;
+  font-weight: 600;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  border: 2px solid transparent;
+  @include flex-center;
+  gap: 0.5rem;
+
+  &--primary {
+    background-color: #3B82F6;
+    color: $white;
+
+    &:hover {
+      background-color: $dark-blue;
+    }
+  }
+
+  &--outline {
+    background-color: transparent;
+    border-color: $light-blue;
+    color: $dark-blue;
+
+    &:hover {
+      background-color: $light-blue;
+    }
+  }
+
+  &--yellow-outline {
+    background-color: $white;
+    border: 1px solid #FACC15;
+    color: #FACC15;
+    width: 253px;
+    height: 52px;
+    padding: 0.75rem 1.5rem;
+    gap: 0.75rem;
+    border-radius: 5px;
+
+    &:hover {
+      background-color: #fef3c7;
+      transform: translateY(-2px);
+    }
+
+    .btn__icon-circle {
+      width: 40px;
+      height: 40px;
+      background-color: #FACC15;
+      border-radius: 50%;
+      @include flex-center;
+      flex-shrink: 0;
+      padding: 5px;
+    }
+
+    .btn__car-icon {
+      width: 26px;
+      height: 30px;
+      object-fit: contain;
+    }
+  }
+
+  &--blue {
+    background-color: #0EA5E9;
+    color: $white;
+    width: 157px;
+    height: 48px;
+    border-radius: 5px;
+
+    &:hover {
+      background-color: #0284c7;
+    }
+
+    .btn__arrow {
+      color: $white;
+      stroke: $white;
+      width: 20px;
+      height: 20px;
+      margin-left: 0.5rem;
+      stroke-width: 2.5;
+      display: inline-block;
+    }
+  }
+
+  &__arrow {
+    width: 20px;
+    height: 20px;
+    margin-left: 0.5rem;
+    stroke-width: 2.5;
+    display: inline-block;
+    vertical-align: middle;
+    flex-shrink: 0;
+  }
+}
+
+// Main Hero Section
+.main {
+  min-height: calc(100vh - 70px);
+  background: $white;
+  padding: 3rem 0;
+}
+
+.hero {
+  @include flex-between;
+  gap: 4rem;
+  align-items: center;
+  min-height: calc(100vh - 70px);
+  padding: 2rem 1.5rem;
+
+  &__content {
+    flex: 1;
+    max-width: 600px;
+  }
+
+  &__title {
+    font-family: 'Inter', sans-serif;
+    font-size: 60px;
+    font-weight: 600;
+    color: #111827;
+    line-height: 72px;
+    letter-spacing: -0.04em;
+    margin-bottom: 1.5rem;
+    text-align: left;
+
+    &--highlight {
+      display: block;
+    }
+  }
+
+  &__description {
+    font-family: 'Inter', sans-serif;
+    font-size: 1rem;
+    font-weight: 400;
+    color: #4B5563;
+    margin-bottom: 2rem;
+    line-height: 1.5;
+    text-align: left;
+    display: inline-block;
+
+    &-icon {
+      width: 38px;
+      height: 38px;
+      vertical-align: middle;
+      display: inline-block;
+      margin-left: 0.5rem;
+      position: relative;
+      top: 1px;
+    }
+  }
+
+  &__icons {
+    @include flex-center;
+    gap: 1rem;
+    margin-bottom: 2rem;
+  }
+
+  &__actions {
+    @include flex-center;
+    gap: 1rem;
+    flex-wrap: wrap;
+  }
+
+  &__app {
+    flex: 1;
+    @include flex-center;
+    max-width: 500px;
+    position: relative;
+  }
+}
+
+.icon-wrapper {
+  width: 40px;
+  height: 40px;
+  background-color: $light-blue;
+  border-radius: 50%;
+  @include flex-center;
+  padding: 0.5rem;
+
+  .icon {
+    width: 24px;
+    height: 24px;
+    stroke-width: 2;
+    color: $dark-blue;
+  }
+}
+
+// Phone Mockup
+.phone-mockup {
+  position: sticky;
+  top: 100px;
+  width: 100%;
+  max-width: 400px;
+  aspect-ratio: 9/16;
+  background: linear-gradient(145deg, #ffffff, #f0f0f0);
+  border-radius: 40px;
+  padding: 1.5rem;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+  transform: none;
+  transition: transform 0.3s ease;
+  z-index: 10;
+  align-self: flex-start;
+
+  &:hover {
+    transform: scale(1.02);
+  }
+
+  &__notch {
+    position: absolute;
+    top: 1.5rem;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 120px;
+    height: 25px;
+    background: linear-gradient(145deg, #ffffff, #f0f0f0);
+    border-radius: 0 0 15px 15px;
+    z-index: 10;
+    
+    &::before {
+      content: '';
+      position: absolute;
+      top: 8px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 8px;
+      height: 8px;
+      background: #2D3748;
+      border-radius: 50%;
+    }
+    
+    &::after {
+      content: '';
+      position: absolute;
+      top: 10px;
+      left: 50%;
+      transform: translateX(20px);
+      width: 40px;
+      height: 4px;
+      background: #2D3748;
+      border-radius: 2px;
+    }
+  }
+
+  &__screen {
+    width: 100%;
+    height: 100%;
+    border-radius: 30px;
+    position: relative;
+    overflow: hidden;
+    background: linear-gradient(180deg, #a8e6cf 0%, #ffd3b6 100%);
+  }
+
+  &__background-image {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    object-position: center bottom;
+    display: block;
+  }
+}
+
+// App Card Areas (clickable zones on the image)
+.app-card-area {
+  position: absolute;
+  z-index: 5;
+  cursor: pointer;
+
+  &--colocation {
+    bottom: 5%;
+    left: 4%;
+    width: 44%;
+    height: 38%;
+    border-radius: 20px;
+  }
+
+  &--covoiturage {
+    bottom: 5%;
+    right: 4%;
+    width: 44%;
+    height: 38%;
+    border-radius: 20px;
+  }
+}
+
+.app-card-btn {
+  width: 100%;
+  height: 100%;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  border-radius: 20px;
+  transition: all 0.3s ease;
+
+  &:hover {
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(2px);
+  }
+
+  &:active {
+    transform: scale(0.98);
+  }
+}
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border-width: 0;
+}
+
+.app-title {
+  font-size: 1.75rem;
+  font-weight: 800;
+  color: #1a202c;
+  margin-bottom: 2rem;
+  text-align: center;
+  position: relative;
+  z-index: 3;
+}
+
+.app-sections {
+  @include flex-center;
+  flex-direction: row;
+  gap: 1rem;
+  position: relative;
+  z-index: 2;
+  flex-wrap: wrap;
+}
+
+.app-card {
+  background-color: $white;
+  border-radius: 20px;
+  padding: 1.5rem 1rem;
+  @include flex-column;
+  align-items: center;
+  gap: 0.75rem;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  border: 3px solid;
+  position: relative;
+  z-index: 3;
+  flex: 1;
+  min-width: 140px;
+  max-width: 180px;
+
+  &:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+  }
+
+  &--colocation {
+    background: linear-gradient(135deg, #dbeafe 0%, #bfdbfe 100%);
+    border-color: #93c5fd;
+  }
+
+  &--covoiturage {
+    background: linear-gradient(135deg, #d1fae5 0%, #a7f3d0 100%);
+    border-color: #6ee7b7;
+  }
+
+  &__icon {
+    width: 90px;
+    height: 70px;
+    @include flex-center;
+    margin-bottom: 0.5rem;
+    
+    svg {
+      width: 100%;
+      height: 100%;
+    }
+  }
+
+  &__title {
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: $text-dark;
+    text-align: center;
+    margin: 0;
+  }
+
+  &__btn {
+    padding: 0.75rem 1.5rem;
+    border-radius: 10px;
+    font-weight: 600;
+    font-size: 0.9rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    border: 2px solid;
+
+    &--blue {
+      background-color: #dbeafe;
+      border-color: #60a5fa;
+      color: $dark-blue;
+      border-width: 2px;
+      font-size: 0.85rem;
+      padding: 0.6rem 1rem;
+      white-space: nowrap;
+
+      &:hover {
+        background-color: #93c5fd;
+        border-color: #3b82f6;
+      }
+    }
+
+    &--green {
+      background-color: #d1fae5;
+      border-color: #34d399;
+      color: $dark-blue;
+      border-width: 2px;
+      font-size: 0.85rem;
+      padding: 0.6rem 1rem;
+      white-space: nowrap;
+
+      &:hover {
+        background-color: #6ee7b7;
+        border-color: #10b981;
+      }
+    }
+  }
+}
+
+.app-background {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 1;
+  pointer-events: none;
+
+  .sky-gradient {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(180deg, #a8e6cf 0%, #ffd3b6 100%);
+  }
+
+  .clouds {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 40%;
+  }
+
+  .cityscape {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 50%;
+  }
+}
+
+// Media Queries
+@media (max-width: 1024px) {
+  .hero {
+    flex-direction: column;
+    gap: 3rem;
+
+    &__content {
+      max-width: 100%;
+      text-align: center;
+    }
+
+    &__title {
+      font-size: 48px;
+      line-height: 58px;
+      text-align: center;
+    }
+  }
+
+  .phone-mockup {
+    position: relative;
+    transform: none;
+    max-width: 350px;
+  }
+}
+
+@media (max-width: 768px) {
+  .nav {
+    &__menu {
+      position: fixed;
+      top: 70px;
+      left: -100%;
+      width: 100%;
+      height: calc(100vh - 70px);
+      background-color: $white;
+      @include flex-column;
+      align-items: flex-start;
+      padding: 2rem;
+      gap: 1.5rem;
+      transition: left 0.3s ease;
+      box-shadow: 2px 0 10px rgba(0, 0, 0, 0.1);
+
+      &.active {
+        left: 0;
+      }
+    }
+
+    &__actions {
+      gap: 0.5rem;
+
+      .btn {
+        padding: 0.5rem 1rem;
+        font-size: 0.9rem;
+      }
+    }
+
+    &__toggle {
+      display: flex;
+    }
+  }
+
+  .hero {
+    padding: 2rem 1rem;
+
+    &__title {
+      font-size: 36px;
+      line-height: 43px;
+      text-align: center;
+    }
+
+    &__description {
+      font-size: 1.1rem;
+    }
+
+    &__actions {
+      flex-direction: column;
+      width: 100%;
+
+      .btn {
+        width: 100%;
+      }
+    }
+  }
+
+  .phone-mockup {
+    position: relative;
+    max-width: 300px;
+    padding: 1rem;
+
+    &__screen {
+      padding: 1.5rem 1rem;
+    }
+  }
+
+  .app-title {
+    font-size: 1.5rem;
+  }
+
+  .app-sections {
+    flex-direction: column;
+  }
+
+  .app-card {
+    padding: 1.5rem;
+    width: 100%;
+  }
+}
+
+@media (max-width: 480px) {
+  .nav {
+    padding: 1rem;
+
+    &__logo .logo-link {
+      font-size: 1.25rem;
+    }
+
+    &__actions {
+      .btn {
+        padding: 0.5rem 0.75rem;
+        font-size: 0.85rem;
+      }
+    }
+  }
+
+  .hero {
+    &__title {
+      font-size: 32px;
+      line-height: 38px;
+      text-align: center;
+    }
+
+    &__description {
+      font-size: 1rem;
+    }
+  }
+
+  .phone-mockup {
+    position: relative;
+    max-width: 250px;
+  }
+
+  .app-sections {
+    flex-direction: column;
+  }
+
+  .app-card {
+    padding: 1.25rem;
+    width: 100%;
+
+    &__icon {
+      width: 60px;
+      height: 60px;
+    }
+
+    &__title {
+      font-size: 1.1rem;
+    }
+
+    &__btn {
+      padding: 0.6rem 1.2rem;
+      font-size: 0.85rem;
+    }
+  }
+}
+
+// Footer Styles
+.footer {
+  background-color: #f8fafc;
+  border-top: 1px solid $light-gray;
+  padding: 3rem 0 1.5rem;
+  margin-top: 4rem;
+
+  &__content {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 2rem;
+    margin-bottom: 2rem;
+  }
+
+  &__section {
+    @include flex-column;
+    gap: 1rem;
+  }
+
+  &__about {
+    max-width: 300px;
+  }
+
+  &__logo {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: #111827;
+    margin-bottom: 0.5rem;
+    letter-spacing: -0.5px;
+  }
+
+  &__description {
+    font-size: 0.9rem;
+    color: $dark-gray;
+    line-height: 1.6;
+  }
+
+  &__title {
+    font-size: 1rem;
+    font-weight: 600;
+    color: #111827;
+    margin-bottom: 0.5rem;
+  }
+
+  &__links {
+    list-style: none;
+    @include flex-column;
+    gap: 0.75rem;
+  }
+
+  &__link {
+    color: $dark-gray;
+    text-decoration: none;
+    font-size: 0.9rem;
+    transition: color 0.3s ease;
+
+    &:hover {
+      color: $primary-blue;
+    }
+  }
+
+  &__social {
+    @include flex-center;
+    gap: 1rem;
+    margin-top: 0.5rem;
+  }
+
+  &__social-link {
+    width: 36px;
+    height: 36px;
+    background-color: $white;
+    border: 1px solid $light-gray;
+    border-radius: 50%;
+    @include flex-center;
+    color: $dark-gray;
+    transition: all 0.3s ease;
+
+    &:hover {
+      background-color: $primary-blue;
+      color: $white;
+      border-color: $primary-blue;
+      transform: translateY(-2px);
+    }
+
+    svg {
+      width: 18px;
+      height: 18px;
+    }
+  }
+
+  &__bottom {
+    border-top: 1px solid $light-gray;
+    padding-top: 1.5rem;
+    text-align: center;
+  }
+
+  &__copyright {
+    font-size: 0.85rem;
+    color: $dark-gray;
+    margin: 0;
+  }
+}
+
+// Footer Media Queries
+@media (max-width: 768px) {
+  .footer {
+    padding: 2rem 0 1rem;
+
+    &__content {
+      grid-template-columns: 1fr;
+      gap: 2rem;
+    }
+
+    &__about {
+      max-width: 100%;
+    }
+
+    &__social {
+      justify-content: flex-start;
+    }
+  }
+}
+
+// Signup Page Styles
+.signup-section {
+  min-height: calc(100vh - 70px);
+  @include flex-center;
+  padding: 3rem 1.5rem;
+}
+
+.signup-card {
+  background-color: $white;
+  border-radius: 20px;
+  padding: 3rem;
+  max-width: 500px;
+  width: 100%;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
+}
+
+.signup-title {
+  font-family: 'Inter', sans-serif;
+  font-size: 2rem;
+  font-weight: 700;
+  color: #111827;
+  text-align: center;
+  margin-bottom: 0.5rem;
+}
+
+.signup-subtitle {
+  font-family: 'Inter', sans-serif;
+  font-size: 1rem;
+  color: $dark-gray;
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+.signup-form {
+  @include flex-column;
+  gap: 1.5rem;
+}
+
+.form-group {
+  @include flex-column;
+  gap: 0.5rem;
+
+  &--checkbox {
+    flex-direction: row;
+    align-items: flex-start;
+    gap: 0.75rem;
+  }
+}
+
+.form-label {
+  font-family: 'Inter', sans-serif;
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: #111827;
+}
+
+.form-input {
+  font-family: 'Inter', sans-serif;
+  font-size: 1rem;
+  padding: 0.75rem 1rem;
+  border: 2px solid $light-gray;
+  border-radius: 8px;
+  color: #111827;
+  transition: border-color 0.3s ease;
+
+  &:focus {
+    outline: none;
+    border-color: $primary-blue;
+  }
+
+  &::placeholder {
+    color: $dark-gray;
+    opacity: 0.6;
+  }
+}
+
+.form-checkbox-label {
+  font-family: 'Inter', sans-serif;
+  font-size: 0.85rem;
+  color: $dark-gray;
+  line-height: 1.5;
+  cursor: pointer;
+}
+
+.form-link {
+  color: $primary-blue;
+  text-decoration: none;
+
+  &:hover {
+    text-decoration: underline;
+  }
+}
+
+.btn--full {
+  width: 100%;
+}
+
+.signup-divider {
+  text-align: center;
+  margin: 2rem 0;
+  position: relative;
+
+  &::before,
+  &::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    width: 45%;
+    height: 1px;
+    background-color: $light-gray;
+  }
+
+  &::before {
+    left: 0;
+  }
+
+  &::after {
+    right: 0;
+  }
+
+  span {
+    background-color: $white;
+    padding: 0 1rem;
+    color: $dark-gray;
+    font-size: 0.9rem;
+  }
+}
+
+.social-signup {
+  @include flex-column;
+  gap: 1rem;
+}
+
+.btn--social {
+  width: 100%;
+  @include flex-center;
+  gap: 0.75rem;
+  padding: 0.75rem 1.5rem;
+  border: 2px solid $light-gray;
+  background-color: $white;
+  color: #111827;
+  font-weight: 600;
+
+  svg {
+    width: 20px;
+    height: 20px;
+  }
+
+  &:hover {
+    background-color: #f8fafc;
+    border-color: $dark-gray;
+  }
+
+  &--google {
+    &:hover {
+      border-color: #4285F4;
+    }
+  }
+
+  &--facebook {
+    &:hover {
+      border-color: #1877F2;
+      color: #1877F2;
+    }
+  }
+}
+
+.signup-login {
+  text-align: center;
+  margin-top: 2rem;
+  font-size: 0.9rem;
+  color: $dark-gray;
+}
+
+.signup-link {
+  color: $primary-blue;
+  text-decoration: none;
+  font-weight: 600;
+
+  &:hover {
+    text-decoration: underline;
+  }
+}
+
+// Signup Media Queries
+@media (max-width: 768px) {
+  .signup-card {
+    padding: 2rem 1.5rem;
+  }
+
+  .signup-title {
+    font-size: 1.75rem;
+  }
+}
+
+// Login Page Styles
+.login-section {
+  min-height: calc(100vh - 70px);
+  @include flex-center;
+  padding: 3rem 1.5rem;
+}
+
+.login-card {
+  background-color: $white;
+  border-radius: 20px;
+  padding: 3rem;
+  max-width: 450px;
+  width: 100%;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
+}
+
+.login-title {
+  font-family: 'Inter', sans-serif;
+  font-size: 2rem;
+  font-weight: 700;
+  color: #111827;
+  text-align: center;
+  margin-bottom: 0.5rem;
+}
+
+.login-subtitle {
+  font-family: 'Inter', sans-serif;
+  font-size: 1rem;
+  color: $dark-gray;
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+.login-form {
+  @include flex-column;
+  gap: 1.5rem;
+}
+
+.form-group--row {
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.form-link--forgot {
+  font-size: 0.85rem;
+}
+
+.login-divider {
+  text-align: center;
+  margin: 2rem 0;
+  position: relative;
+
+  &::before,
+  &::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    width: 45%;
+    height: 1px;
+    background-color: $light-gray;
+  }
+
+  &::before {
+    left: 0;
+  }
+
+  &::after {
+    right: 0;
+  }
+
+  span {
+    background-color: $white;
+    padding: 0 1rem;
+    color: $dark-gray;
+    font-size: 0.9rem;
+  }
+}
+
+.social-login {
+  @include flex-column;
+  gap: 1rem;
+}
+
+.login-signup {
+  text-align: center;
+  margin-top: 2rem;
+  font-size: 0.9rem;
+  color: $dark-gray;
+}
+
+.login-link {
+  color: $primary-blue;
+  text-decoration: none;
+  font-weight: 600;
+
+  &:hover {
+    text-decoration: underline;
+  }
+}
+
+// Login Media Queries
+@media (max-width: 768px) {
+  .login-card {
+    padding: 2rem 1.5rem;
+  }
+
+  .login-title {
+    font-size: 1.75rem;
+  }
+
+  .form-group--row {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.75rem;
+  }
+}
+
