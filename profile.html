@@ -1,0 +1,540 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Mon profil - COLLOCOV">
+    <title>Mon profil - COLLOCOV</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="dist/css/main.css">
+</head>
+<body>
+    <!-- Header Navigation -->
+    <header class="header">
+        <nav class="nav container">
+            <div class="nav__logo">
+                <a href="index.html" class="logo-link">/COLLOCOV</a>
+            </div>
+            <ul class="nav__menu">
+                <li class="nav__item"><a href="index.html" class="nav__link">Acceuil</a></li>
+                <li class="nav__item"><a href="#" class="nav__link">À propos</a></li>
+                <li class="nav__item"><a href="#" class="nav__link">Contact</a></li>
+                <li class="nav__item"><a href="#" class="nav__link">Tarifs</a></li>
+                <li class="nav__item"><a href="urgence.html" class="nav__link">urgence</a></li>
+            </ul>
+            <div class="nav__actions">
+                <div class="nav__profile">
+                    <button class="nav__profile-btn" id="profileBtn" aria-label="Menu profil">
+                        <img src="https://ui-avatars.com/api/?name=User&background=3B82F6&color=fff&size=128" alt="Profile" class="nav__profile-img" id="profileImg">
+                    </button>
+                    <div class="nav__dropdown" id="profileDropdown">
+                        <a href="#" class="nav__dropdown-item" onclick="window.location.href='profile.html'; return false;">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                                <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+                                <circle cx="12" cy="7" r="4"></circle>
+                            </svg>
+                            My profile
+                        </a>
+                        <div class="nav__dropdown-divider"></div>
+                        <div class="nav__dropdown-user" id="dropdownUserName"></div>
+                        <button class="nav__dropdown-item nav__dropdown-item--logout" onclick="logoutUser()">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                                <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path>
+                                <polyline points="16 17 21 12 16 7"></polyline>
+                                <line x1="21" y1="12" x2="9" y2="12"></line>
+                            </svg>
+                            Déconnexion
+                        </button>
+                    </div>
+                </div>
+            </div>
+            <button class="nav__toggle" aria-label="Toggle menu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+        </nav>
+    </header>
+
+    <!-- Main Content -->
+    <main class="main">
+        <div class="dashboard-layout">
+            <!-- Sidebar Navigation -->
+            <aside class="sidebar">
+                <div class="sidebar__header">
+                    <div class="sidebar__user">
+                        <img src="https://ui-avatars.com/api/?name=User&background=3B82F6&color=fff&size=128" alt="Profile" class="sidebar__user-img" id="sidebarProfileImg">
+                        <span class="sidebar__user-name" id="sidebarUserName">Utilisateur</span>
+                    </div>
+                    <div class="sidebar__icons">
+                        <button class="sidebar__icon-btn" id="messagesBtn" aria-label="Messages" onclick="window.location.href='inbox.html'">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>
+                            </svg>
+                            <span class="sidebar__icon-badge" id="messagesBadge">0</span>
+                        </button>
+                        <button class="sidebar__icon-btn" id="notificationsBtn" aria-label="Notifications" onclick="window.location.href='notifications.html'">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"></path>
+                                <path d="M13.73 21a2 2 0 0 1-3.46 0"></path>
+                            </svg>
+                            <span class="sidebar__icon-badge" id="notificationsBadge">0</span>
+                        </button>
+                    </div>
+                </div>
+                <nav class="sidebar__nav">
+                    <a href="dashboard.html" class="sidebar__nav-item">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <rect x="3" y="3" width="7" height="7"></rect>
+                            <rect x="14" y="3" width="7" height="7"></rect>
+                            <rect x="14" y="14" width="7" height="7"></rect>
+                            <rect x="3" y="14" width="7" height="7"></rect>
+                        </svg>
+                        <span>Tableau de bord</span>
+                    </a>
+                    <a href="covoiturages.html" class="sidebar__nav-item">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M5 17H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2h-1"></path>
+                            <polygon points="12 15 17 21 7 21 12 15"></polygon>
+                        </svg>
+                        <span>Liste des covoiturages</span>
+                    </a>
+                    <a href="colocations.html" class="sidebar__nav-item">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
+                            <polyline points="9 22 9 12 15 12 15 22"></polyline>
+                        </svg>
+                        <span>Liste des colocations</span>
+                    </a>
+                    <a href="profile.html" class="sidebar__nav-item sidebar__nav-item--active">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+                            <circle cx="12" cy="7" r="4"></circle>
+                        </svg>
+                        <span>My profile</span>
+                    </a>
+                    <a href="reviews.html" class="sidebar__nav-item">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon>
+                        </svg>
+                        <span>Liste des reviews</span>
+                    </a>
+                </nav>
+            </aside>
+
+            <!-- Profile Content -->
+            <div class="dashboard-main">
+                <div class="container">
+                    <div class="profile-section">
+                        <h1 class="profile-section-title">Mon profil</h1>
+                        
+                        <div class="profile-content">
+                            <!-- Profile Header -->
+                            <div class="profile-header-card">
+                                <div class="profile-avatar-large">
+                                    <img src="https://ui-avatars.com/api/?name=User&background=3B82F6&color=fff&size=200" alt="Profile" id="profileAvatarLarge">
+                                    <button class="avatar-edit-btn" id="avatarEditBtn">
+                                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                            <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"></path>
+                                            <path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"></path>
+                                        </svg>
+                                    </button>
+                                </div>
+                                <div class="profile-header-info">
+                                    <h2 class="profile-name-large" id="profileNameLarge">Utilisateur</h2>
+                                    <p class="profile-email-large" id="profileEmailLarge">email@example.com</p>
+                                    <div class="profile-badges-large">
+                                        <span class="profile-badge-large profile-badge-large--verified">
+                                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                                <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path>
+                                                <polyline points="22 4 12 14.01 9 11.01"></polyline>
+                                            </svg>
+                                            Compte vérifié
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Profile Tabs -->
+                            <div class="profile-tabs">
+                                <button class="profile-tab profile-tab--active" data-tab="info">Informations</button>
+                                <button class="profile-tab" data-tab="security">Sécurité</button>
+                                <button class="profile-tab" data-tab="preferences">Préférences</button>
+                            </div>
+
+                            <!-- Tab Content -->
+                            <div class="profile-tab-content">
+                                <!-- Informations Tab -->
+                                <div class="tab-panel tab-panel--active" id="tab-info">
+                                    <div class="profile-form-card">
+                                        <h3 class="profile-form-title">Informations personnelles</h3>
+                                        <form class="profile-form" id="profileInfoForm">
+                                            <div class="form-row">
+                                                <div class="form-group">
+                                                    <label for="profileNom" class="form-label">Nom complet *</label>
+                                                    <input type="text" id="profileNom" name="nom" class="form-input" required>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label for="profileEmail" class="form-label">Email *</label>
+                                                    <input type="email" id="profileEmail" name="email" class="form-input" required>
+                                                </div>
+                                            </div>
+                                            <div class="form-row">
+                                                <div class="form-group">
+                                                    <label for="profileTelephone" class="form-label">Téléphone *</label>
+                                                    <input type="tel" id="profileTelephone" name="telephone" class="form-input" required>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label for="profileDateNaissance" class="form-label">Date de naissance</label>
+                                                    <input type="date" id="profileDateNaissance" name="dateNaissance" class="form-input">
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="profileBio" class="form-label">Biographie</label>
+                                                <textarea id="profileBio" name="bio" class="form-textarea" rows="4" placeholder="Parlez-nous de vous..."></textarea>
+                                            </div>
+                                            <div class="form-actions">
+                                                <button type="submit" class="btn btn--primary">Enregistrer les modifications</button>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+
+                                <!-- Sécurité Tab -->
+                                <div class="tab-panel" id="tab-security">
+                                    <div class="profile-form-card">
+                                        <h3 class="profile-form-title">Changer le mot de passe</h3>
+                                        <form class="profile-form" id="profilePasswordForm">
+                                            <div class="form-group">
+                                                <label for="currentPassword" class="form-label">Mot de passe actuel *</label>
+                                                <input type="password" id="currentPassword" name="currentPassword" class="form-input" required>
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="newPassword" class="form-label">Nouveau mot de passe *</label>
+                                                <input type="password" id="newPassword" name="newPassword" class="form-input" required>
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="confirmPassword" class="form-label">Confirmer le nouveau mot de passe *</label>
+                                                <input type="password" id="confirmPassword" name="confirmPassword" class="form-input" required>
+                                            </div>
+                                            <div class="form-actions">
+                                                <button type="submit" class="btn btn--primary">Changer le mot de passe</button>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+
+                                <!-- Préférences Tab -->
+                                <div class="tab-panel" id="tab-preferences">
+                                    <div class="profile-form-card">
+                                        <h3 class="profile-form-title">Préférences</h3>
+                                        <form class="profile-form" id="profilePreferencesForm">
+                                            <div class="form-group">
+                                                <label class="form-label">Notifications</label>
+                                                <div class="checkbox-group">
+                                                    <label class="checkbox-label">
+                                                        <input type="checkbox" id="notifEmail" name="notifEmail" checked>
+                                                        <span>Notifications par email</span>
+                                                    </label>
+                                                    <label class="checkbox-label">
+                                                        <input type="checkbox" id="notifSMS" name="notifSMS">
+                                                        <span>Notifications par SMS</span>
+                                                    </label>
+                                                    <label class="checkbox-label">
+                                                        <input type="checkbox" id="notifPush" name="notifPush" checked>
+                                                        <span>Notifications push</span>
+                                                    </label>
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="language" class="form-label">Langue</label>
+                                                <select id="language" name="language" class="form-input">
+                                                    <option value="fr">Français</option>
+                                                    <option value="en">English</option>
+                                                    <option value="ar">العربية</option>
+                                                </select>
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="theme" class="form-label">Thème</label>
+                                                <select id="theme" name="theme" class="form-input">
+                                                    <option value="light">Clair</option>
+                                                    <option value="dark">Sombre</option>
+                                                    <option value="auto">Automatique</option>
+                                                </select>
+                                            </div>
+                                            <div class="form-actions">
+                                                <button type="submit" class="btn btn--primary">Enregistrer les préférences</button>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer__content">
+                <div class="footer__section footer__about">
+                    <h3 class="footer__logo">/COLLOCOV</h3>
+                    <p class="footer__description">
+                        La plateforme qui connecte les étudiants pour la colocation et le covoiturage. 
+                        Libère ton potentiel étudiant avec nous.
+                    </p>
+                </div>
+                <div class="footer__section">
+                    <h4 class="footer__title">Liens rapides</h4>
+                    <ul class="footer__links">
+                        <li><a href="index.html" class="footer__link">Acceuil</a></li>
+                        <li><a href="#" class="footer__link">À propos</a></li>
+                        <li><a href="#" class="footer__link">Contact</a></li>
+                        <li><a href="#" class="footer__link">Tarifs</a></li>
+                    </ul>
+                </div>
+                <div class="footer__section">
+                    <h4 class="footer__title">Services</h4>
+                    <ul class="footer__links">
+                        <li><a href="#" class="footer__link">Colocation Étudiante</a></li>
+                        <li><a href="#" class="footer__link">Covoiturage</a></li>
+                        <li><a href="urgence.html" class="footer__link">Urgence</a></li>
+                        <li><a href="#" class="footer__link">FAQ</a></li>
+                    </ul>
+                </div>
+                <div class="footer__section">
+                    <h4 class="footer__title">Contact</h4>
+                    <ul class="footer__links">
+                        <li><a href="mailto:contact@collocov.com" class="footer__link">contact@collocov.com</a></li>
+                        <li><a href="tel:+33123456789" class="footer__link">+33 1 23 45 67 89</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer__bottom">
+                <p class="footer__copyright">
+                    &copy; 2024 COLLOCOV. Tous droits réservés.
+                </p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="js/auth.js"></script>
+    <script src="js/main.js"></script>
+    <script>
+        // Vérifier si l'utilisateur est connecté
+        document.addEventListener('DOMContentLoaded', function() {
+            const currentUser = isLoggedIn();
+            
+            if (!currentUser) {
+                alert('Vous devez être connecté pour accéder à cette page');
+                window.location.href = 'connexion.html';
+                return;
+            }
+            
+            // Récupérer les données complètes de l'utilisateur
+            const user = getCurrentUser();
+            
+            // Mettre à jour l'image de profil
+            const profileImg = document.getElementById('profileImg');
+            if (profileImg) {
+                const userName = currentUser.nom || 'User';
+                profileImg.src = `https://ui-avatars.com/api/?name=${encodeURIComponent(userName)}&background=3B82F6&color=fff&size=128`;
+            }
+            
+            const sidebarProfileImg = document.getElementById('sidebarProfileImg');
+            if (sidebarProfileImg) {
+                const userName = currentUser.nom || 'User';
+                sidebarProfileImg.src = `https://ui-avatars.com/api/?name=${encodeURIComponent(userName)}&background=3B82F6&color=fff&size=128`;
+            }
+            
+            const profileAvatarLarge = document.getElementById('profileAvatarLarge');
+            if (profileAvatarLarge) {
+                const userName = currentUser.nom || 'User';
+                profileAvatarLarge.src = `https://ui-avatars.com/api/?name=${encodeURIComponent(userName)}&background=3B82F6&color=fff&size=200`;
+            }
+            
+            // Afficher le nom de l'utilisateur
+            const sidebarUserName = document.getElementById('sidebarUserName');
+            if (sidebarUserName) {
+                sidebarUserName.textContent = currentUser.nom;
+            }
+            
+            const profileNameLarge = document.getElementById('profileNameLarge');
+            if (profileNameLarge) {
+                profileNameLarge.textContent = currentUser.nom;
+            }
+            
+            const profileEmailLarge = document.getElementById('profileEmailLarge');
+            if (profileEmailLarge) {
+                profileEmailLarge.textContent = user.email;
+            }
+            
+            const dropdownUserName = document.getElementById('dropdownUserName');
+            if (dropdownUserName) {
+                dropdownUserName.textContent = currentUser.nom;
+            }
+            
+            // Remplir le formulaire avec les données de l'utilisateur
+            if (user) {
+                document.getElementById('profileNom').value = user.nom || '';
+                document.getElementById('profileEmail').value = user.email || '';
+                document.getElementById('profileTelephone').value = user.telephone || '';
+                if (user.dateNaissance) {
+                    document.getElementById('profileDateNaissance').value = user.dateNaissance;
+                }
+                if (user.bio) {
+                    document.getElementById('profileBio').value = user.bio;
+                }
+            }
+            
+            // Gestion du menu déroulant du profil
+            const profileBtn = document.getElementById('profileBtn');
+            const profileDropdown = document.getElementById('profileDropdown');
+            
+            if (profileBtn && profileDropdown) {
+                profileBtn.addEventListener('click', function(e) {
+                    e.stopPropagation();
+                    profileDropdown.classList.toggle('active');
+                });
+                
+                document.addEventListener('click', function(e) {
+                    if (!profileBtn.contains(e.target) && !profileDropdown.contains(e.target)) {
+                        profileDropdown.classList.remove('active');
+                    }
+                });
+            }
+
+            // Gestion des onglets
+            const tabs = document.querySelectorAll('.profile-tab');
+            const panels = document.querySelectorAll('.tab-panel');
+
+            tabs.forEach(tab => {
+                tab.addEventListener('click', function() {
+                    const targetTab = this.dataset.tab;
+
+                    // Retirer la classe active de tous les onglets et panneaux
+                    tabs.forEach(t => t.classList.remove('profile-tab--active'));
+                    panels.forEach(p => p.classList.remove('tab-panel--active'));
+
+                    // Ajouter la classe active à l'onglet et au panneau sélectionnés
+                    this.classList.add('profile-tab--active');
+                    document.getElementById(`tab-${targetTab}`).classList.add('tab-panel--active');
+                });
+            });
+
+            // Gestion du formulaire d'informations
+            const profileInfoForm = document.getElementById('profileInfoForm');
+            profileInfoForm.addEventListener('submit', function(e) {
+                e.preventDefault();
+
+                const users = JSON.parse(localStorage.getItem('users') || '[]');
+                const userIndex = users.findIndex(u => u.id === user.id);
+
+                if (userIndex !== -1) {
+                    users[userIndex].nom = document.getElementById('profileNom').value;
+                    users[userIndex].email = document.getElementById('profileEmail').value;
+                    users[userIndex].telephone = document.getElementById('profileTelephone').value;
+                    users[userIndex].dateNaissance = document.getElementById('profileDateNaissance').value;
+                    users[userIndex].bio = document.getElementById('profileBio').value;
+
+                    localStorage.setItem('users', JSON.stringify(users));
+
+                    // Mettre à jour la session
+                    const session = isLoggedIn();
+                    if (session) {
+                        session.nom = users[userIndex].nom;
+                        localStorage.setItem('currentUser', JSON.stringify(session));
+                    }
+
+                    // Mettre à jour l'affichage
+                    profileNameLarge.textContent = users[userIndex].nom;
+                    profileEmailLarge.textContent = users[userIndex].email;
+                    sidebarUserName.textContent = users[userIndex].nom;
+                    dropdownUserName.textContent = users[userIndex].nom;
+
+                    // Mettre à jour les avatars
+                    const userName = users[userIndex].nom || 'User';
+                    profileImg.src = `https://ui-avatars.com/api/?name=${encodeURIComponent(userName)}&background=3B82F6&color=fff&size=128`;
+                    sidebarProfileImg.src = `https://ui-avatars.com/api/?name=${encodeURIComponent(userName)}&background=3B82F6&color=fff&size=128`;
+                    profileAvatarLarge.src = `https://ui-avatars.com/api/?name=${encodeURIComponent(userName)}&background=3B82F6&color=fff&size=200`;
+
+                    alert('Profil mis à jour avec succès !');
+                }
+            });
+
+            // Gestion du formulaire de mot de passe
+            const profilePasswordForm = document.getElementById('profilePasswordForm');
+            profilePasswordForm.addEventListener('submit', function(e) {
+                e.preventDefault();
+
+                const currentPassword = document.getElementById('currentPassword').value;
+                const newPassword = document.getElementById('newPassword').value;
+                const confirmPassword = document.getElementById('confirmPassword').value;
+
+                if (user.password !== currentPassword) {
+                    alert('Le mot de passe actuel est incorrect');
+                    return;
+                }
+
+                if (newPassword !== confirmPassword) {
+                    alert('Les nouveaux mots de passe ne correspondent pas');
+                    return;
+                }
+
+                if (newPassword.length < 6) {
+                    alert('Le nouveau mot de passe doit contenir au moins 6 caractères');
+                    return;
+                }
+
+                const users = JSON.parse(localStorage.getItem('users') || '[]');
+                const userIndex = users.findIndex(u => u.id === user.id);
+
+                if (userIndex !== -1) {
+                    users[userIndex].password = newPassword;
+                    localStorage.setItem('users', JSON.stringify(users));
+                    alert('Mot de passe changé avec succès !');
+                    profilePasswordForm.reset();
+                }
+            });
+
+            // Gestion du formulaire de préférences
+            const profilePreferencesForm = document.getElementById('profilePreferencesForm');
+            profilePreferencesForm.addEventListener('submit', function(e) {
+                e.preventDefault();
+
+                const preferences = {
+                    notifEmail: document.getElementById('notifEmail').checked,
+                    notifSMS: document.getElementById('notifSMS').checked,
+                    notifPush: document.getElementById('notifPush').checked,
+                    language: document.getElementById('language').value,
+                    theme: document.getElementById('theme').value
+                };
+
+                const users = JSON.parse(localStorage.getItem('users') || '[]');
+                const userIndex = users.findIndex(u => u.id === user.id);
+
+                if (userIndex !== -1) {
+                    users[userIndex].preferences = preferences;
+                    localStorage.setItem('users', JSON.stringify(users));
+                    alert('Préférences enregistrées avec succès !');
+                }
+            });
+
+            // Charger les préférences si elles existent
+            if (user.preferences) {
+                document.getElementById('notifEmail').checked = user.preferences.notifEmail || false;
+                document.getElementById('notifSMS').checked = user.preferences.notifSMS || false;
+                document.getElementById('notifPush').checked = user.preferences.notifPush || false;
+                document.getElementById('language').value = user.preferences.language || 'fr';
+                document.getElementById('theme').value = user.preferences.theme || 'light';
+            }
+        });
+    </script>
+</body>
+</html>
+

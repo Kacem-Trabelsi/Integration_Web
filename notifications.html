@@ -22,7 +22,7 @@
                 <li class="nav__item"><a href="#" class="nav__link">À propos</a></li>
                 <li class="nav__item"><a href="#" class="nav__link">Contact</a></li>
                 <li class="nav__item"><a href="#" class="nav__link">Tarifs</a></li>
-                <li class="nav__item"><a href="#" class="nav__link">urgence</a></li>
+                <li class="nav__item"><a href="urgence.html" class="nav__link">urgence</a></li>
             </ul>
             <div class="nav__actions">
                 <div class="nav__profile">
@@ -84,6 +84,44 @@
                         </button>
                     </div>
                 </div>
+                <nav class="sidebar__nav">
+                    <a href="dashboard.html" class="sidebar__nav-item">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <rect x="3" y="3" width="7" height="7"></rect>
+                            <rect x="14" y="3" width="7" height="7"></rect>
+                            <rect x="14" y="14" width="7" height="7"></rect>
+                            <rect x="3" y="14" width="7" height="7"></rect>
+                        </svg>
+                        <span>Tableau de bord</span>
+                    </a>
+                    <a href="covoiturages.html" class="sidebar__nav-item">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M5 17H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2h-1"></path>
+                            <polygon points="12 15 17 21 7 21 12 15"></polygon>
+                        </svg>
+                        <span>Liste des covoiturages</span>
+                    </a>
+                    <a href="colocations.html" class="sidebar__nav-item">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
+                            <polyline points="9 22 9 12 15 12 15 22"></polyline>
+                        </svg>
+                        <span>Liste des colocations</span>
+                    </a>
+                    <a href="profile.html" class="sidebar__nav-item">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+                            <circle cx="12" cy="7" r="4"></circle>
+                        </svg>
+                        <span>My profile</span>
+                    </a>
+                    <a href="reviews.html" class="sidebar__nav-item">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon>
+                        </svg>
+                        <span>Liste des reviews</span>
+                    </a>
+                </nav>
             </aside>
 
             <!-- Notifications Content -->
@@ -135,7 +173,7 @@
                     <ul class="footer__links">
                         <li><a href="#" class="footer__link">Colocation Étudiante</a></li>
                         <li><a href="#" class="footer__link">Covoiturage</a></li>
-                        <li><a href="#" class="footer__link">Urgence</a></li>
+                        <li><a href="urgence.html" class="footer__link">Urgence</a></li>
                         <li><a href="#" class="footer__link">FAQ</a></li>
                     </ul>
                 </div>
@@ -409,6 +447,16 @@
             // Afficher toutes les notifications au chargement
             displayNotifications('all');
             updateBadgeCount();
+
+            // Mettre en surbrillance l'élément actif dans la sidebar
+            const currentPage = window.location.pathname.split('/').pop() || 'notifications.html';
+            const navItems = document.querySelectorAll('.sidebar__nav-item');
+            navItems.forEach(item => {
+                const href = item.getAttribute('href');
+                if (href === currentPage) {
+                    item.classList.add('sidebar__nav-item--active');
+                }
+            });
         });
     </script>
 </body>

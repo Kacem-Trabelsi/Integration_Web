@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Boîte de réception - COLLOCOV">
-    <title>Messages - COLLOCOV</title>
+    <meta name="description" content="Écrire un avis - COLLOCOV">
+    <title>Écrire un avis - COLLOCOV</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
@@ -69,7 +69,7 @@
                         <span class="sidebar__user-name" id="sidebarUserName">Utilisateur</span>
                     </div>
                     <div class="sidebar__icons">
-                        <button class="sidebar__icon-btn sidebar__icon-btn--active" id="messagesBtn" aria-label="Messages" onclick="window.location.href='inbox.html'">
+                        <button class="sidebar__icon-btn" id="messagesBtn" aria-label="Messages" onclick="window.location.href='inbox.html'">
                             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                                 <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>
                             </svg>
@@ -124,99 +124,91 @@
                 </nav>
             </aside>
 
-            <!-- Inbox Content -->
+            <!-- Écrire Review Content -->
             <div class="dashboard-main">
                 <div class="container">
-                    <div class="inbox-section">
-                        <h1 class="inbox-title">Messages</h1>
-                        <div class="inbox-container">
-                            <!-- Conversations List -->
-                            <div class="inbox-conversations">
-                                <div class="inbox-search">
-                                    <input type="text" placeholder="Rechercher une conversation..." class="inbox-search-input" id="searchInput">
-                                    <svg class="inbox-search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                        <circle cx="11" cy="11" r="8"></circle>
-                                        <path d="m21 21-4.35-4.35"></path>
-                                    </svg>
-                                </div>
-                                <div class="conversations-list" id="conversationsList">
-                                    <!-- Les conversations seront chargées dynamiquement -->
-                                    <div class="conversation-item">
-                                        <img src="https://ui-avatars.com/api/?name=John+Doe&background=10b981&color=fff&size=128" alt="Avatar" class="conversation-avatar">
-                                        <div class="conversation-info">
-                                            <div class="conversation-header">
-                                                <span class="conversation-name">John Doe</span>
-                                                <span class="conversation-time">14:30</span>
-                                            </div>
-                                            <p class="conversation-preview">Salut ! Je suis intéressé par votre colocation...</p>
-                                        </div>
-                                        <span class="conversation-badge">2</span>
-                                    </div>
-                                    <div class="conversation-item conversation-item--active">
-                                        <img src="https://ui-avatars.com/api/?name=Marie+Martin&background=3b82f6&color=fff&size=128" alt="Avatar" class="conversation-avatar">
-                                        <div class="conversation-info">
-                                            <div class="conversation-header">
-                                                <span class="conversation-name">Marie Martin</span>
-                                                <span class="conversation-time">Hier</span>
-                                            </div>
-                                            <p class="conversation-preview">Parfait, je serai disponible demain à 15h</p>
-                                        </div>
-                                    </div>
-                                    <div class="conversation-item">
-                                        <img src="https://ui-avatars.com/api/?name=Pierre+Dupont&background=f59e0b&color=fff&size=128" alt="Avatar" class="conversation-avatar">
-                                        <div class="conversation-info">
-                                            <div class="conversation-header">
-                                                <span class="conversation-name">Pierre Dupont</span>
-                                                <span class="conversation-time">Lun</span>
-                                            </div>
-                                            <p class="conversation-preview">Merci pour le covoiturage !</p>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <!-- Chat Area -->
-                            <div class="inbox-chat">
-                                <div class="chat-header">
-                                    <div class="chat-header-user">
-                                        <img src="https://ui-avatars.com/api/?name=Marie+Martin&background=3b82f6&color=fff&size=128" alt="Avatar" class="chat-header-avatar">
-                                        <div class="chat-header-info">
-                                            <h3 class="chat-header-name">Marie Martin</h3>
-                                            <span class="chat-header-status">En ligne</span>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="chat-messages" id="chatMessages">
-                                    <div class="message message--received">
-                                        <div class="message-content">
-                                            <p>Bonjour ! Je suis intéressée par votre annonce de colocation. Est-ce que la chambre est toujours disponible ?</p>
-                                            <span class="message-time">14:20</span>
-                                        </div>
-                                    </div>
-                                    <div class="message message--sent">
-                                        <div class="message-content">
-                                            <p>Bonjour Marie ! Oui, la chambre est toujours disponible. Voulez-vous venir la visiter ?</p>
-                                            <span class="message-time">14:25</span>
-                                        </div>
-                                    </div>
-                                    <div class="message message--received">
-                                        <div class="message-content">
-                                            <p>Parfait, je serai disponible demain à 15h. Est-ce que ça vous convient ?</p>
-                                            <span class="message-time">14:30</span>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="chat-input-container">
-                                    <input type="text" placeholder="Tapez votre message..." class="chat-input" id="messageInput">
-                                    <button class="chat-send-btn" id="sendBtn">
+                    <div class="ecrire-review-section">
+                        <h1 class="ecrire-review-title">Écrire un avis</h1>
+                        
+                        <form class="review-form" id="reviewForm">
+                            <div class="review-form-card">
+                                <div id="driverInfo" class="driver-info-card" style="display: none;">
+                                    <div class="driver-info-content">
                                         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                            <line x1="22" y1="2" x2="11" y2="13"></line>
-                                            <polygon points="22 2 15 22 11 13 2 9 22 2"></polygon>
+                                            <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+                                            <circle cx="12" cy="7" r="4"></circle>
                                         </svg>
+                                        <div class="driver-info-text">
+                                            <h3 class="driver-info-title">Avis pour le chauffeur</h3>
+                                            <p class="driver-info-name" id="driverName"></p>
+                                            <p class="driver-info-route" id="driverRoute"></p>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="reviewType" class="form-label">Type de service *</label>
+                                    <select id="reviewType" name="type" class="form-input" required>
+                                        <option value="">Sélectionner un type</option>
+                                        <option value="covoiturage" selected>Covoiturage</option>
+                                        <option value="colocation">Colocation</option>
+                                    </select>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="reviewTitle" class="form-label">Titre de votre avis *</label>
+                                    <input type="text" id="reviewTitle" name="title" class="form-input" placeholder="Ex: Excellent trajet !" required>
+                                </div>
+
+                                <div class="form-group">
+                                    <label class="form-label">Note *</label>
+                                    <div class="rating-input" id="ratingInput">
+                                        <button type="button" class="rating-star" data-rating="1" aria-label="1 étoile">
+                                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                                <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon>
+                                            </svg>
+                                        </button>
+                                        <button type="button" class="rating-star" data-rating="2" aria-label="2 étoiles">
+                                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                                <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon>
+                                            </svg>
+                                        </button>
+                                        <button type="button" class="rating-star" data-rating="3" aria-label="3 étoiles">
+                                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                                <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon>
+                                            </svg>
+                                        </button>
+                                        <button type="button" class="rating-star" data-rating="4" aria-label="4 étoiles">
+                                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                                <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon>
+                                            </svg>
+                                        </button>
+                                        <button type="button" class="rating-star" data-rating="5" aria-label="5 étoiles">
+                                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                                <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon>
+                                            </svg>
+                                        </button>
+                                    </div>
+                                    <input type="hidden" id="reviewRating" name="rating" required>
+                                    <p class="rating-hint" id="ratingHint">Cliquez sur les étoiles pour noter</p>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="reviewComment" class="form-label">Votre avis *</label>
+                                    <textarea id="reviewComment" name="comment" class="form-textarea" rows="6" placeholder="Partagez votre expérience..." required></textarea>
+                                </div>
+
+                                <div class="form-actions">
+                                    <button type="button" class="btn btn--outline" onclick="window.location.href='covoiturages.html'">Annuler</button>
+                                    <button type="submit" class="btn btn--primary">
+                                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                            <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon>
+                                        </svg>
+                                        Publier l'avis
                                     </button>
                                 </div>
                             </div>
-                        </div>
+                        </form>
                     </div>
                 </div>
             </div>
@@ -271,37 +263,59 @@
     <script src="js/auth.js"></script>
     <script src="js/main.js"></script>
     <script>
+        let selectedRating = 0;
+
         // Vérifier si l'utilisateur est connecté
         document.addEventListener('DOMContentLoaded', function() {
             const currentUser = isLoggedIn();
             
             if (!currentUser) {
-                alert('Vous devez être connecté pour accéder à cette page');
+                alert('Vous devez être connecté pour écrire un avis');
                 window.location.href = 'connexion.html';
                 return;
             }
+
+            // Récupérer les paramètres de l'URL
+            const urlParams = new URLSearchParams(window.location.search);
+            const driver = urlParams.get('driver');
+            const covoiturageId = urlParams.get('covoiturageId');
+            const from = urlParams.get('from');
+            const to = urlParams.get('to');
+
+            // Si des paramètres sont présents, afficher les informations du chauffeur
+            if (driver) {
+                const driverInfoCard = document.getElementById('driverInfo');
+                const driverName = document.getElementById('driverName');
+                const driverRoute = document.getElementById('driverRoute');
+                const reviewType = document.getElementById('reviewType');
+
+                driverInfoCard.style.display = 'block';
+                driverName.textContent = driver;
+                if (from && to) {
+                    driverRoute.textContent = `${from} → ${to}`;
+                }
+                reviewType.value = 'covoiturage';
+                reviewType.disabled = true;
+            }
             
-            // Mettre à jour l'image de profil avec le nom de l'utilisateur
+            // Mettre à jour l'image de profil
             const profileImg = document.getElementById('profileImg');
             if (profileImg) {
                 const userName = currentUser.nom || 'User';
                 profileImg.src = `https://ui-avatars.com/api/?name=${encodeURIComponent(userName)}&background=3B82F6&color=fff&size=128`;
             }
             
-            // Mettre à jour l'image de profil dans la sidebar
             const sidebarProfileImg = document.getElementById('sidebarProfileImg');
             if (sidebarProfileImg) {
                 const userName = currentUser.nom || 'User';
                 sidebarProfileImg.src = `https://ui-avatars.com/api/?name=${encodeURIComponent(userName)}&background=3B82F6&color=fff&size=128`;
             }
             
-            // Afficher le nom de l'utilisateur dans la sidebar
             const sidebarUserName = document.getElementById('sidebarUserName');
             if (sidebarUserName) {
                 sidebarUserName.textContent = currentUser.nom;
             }
             
-            // Afficher le nom de l'utilisateur dans le dropdown
             const dropdownUserName = document.getElementById('dropdownUserName');
             if (dropdownUserName) {
                 dropdownUserName.textContent = currentUser.nom;
@@ -317,7 +331,6 @@
                     profileDropdown.classList.toggle('active');
                 });
                 
-                // Fermer le menu en cliquant ailleurs
                 document.addEventListener('click', function(e) {
                     if (!profileBtn.contains(e.target) && !profileDropdown.contains(e.target)) {
                         profileDropdown.classList.remove('active');
@@ -325,53 +338,88 @@
                 });
             }
 
-            // Gestion de l'envoi de messages
-            const messageInput = document.getElementById('messageInput');
-            const sendBtn = document.getElementById('sendBtn');
-            const chatMessages = document.getElementById('chatMessages');
+            // Gestion du système de notation par étoiles
+            const ratingStars = document.querySelectorAll('.rating-star');
+            const ratingInput = document.getElementById('reviewRating');
+            const ratingHint = document.getElementById('ratingHint');
 
-            function sendMessage() {
-                const messageText = messageInput.value.trim();
-                if (messageText) {
-                    const messageDiv = document.createElement('div');
-                    messageDiv.className = 'message message--sent';
-                    messageDiv.innerHTML = `
-                        <div class="message-content">
-                            <p>${messageText}</p>
-                            <span class="message-time">${new Date().toLocaleTimeString('fr-FR', { hour: '2-digit', minute: '2-digit' })}</span>
-                        </div>
-                    `;
-                    chatMessages.appendChild(messageDiv);
-                    messageInput.value = '';
-                    chatMessages.scrollTop = chatMessages.scrollHeight;
-                }
-            }
+            ratingStars.forEach(star => {
+                star.addEventListener('click', function() {
+                    selectedRating = parseInt(this.dataset.rating);
+                    ratingInput.value = selectedRating;
+                    updateStars(selectedRating);
+                    updateRatingHint(selectedRating);
+                });
 
-            if (sendBtn) {
-                sendBtn.addEventListener('click', sendMessage);
-            }
+                star.addEventListener('mouseenter', function() {
+                    const hoverRating = parseInt(this.dataset.rating);
+                    updateStars(hoverRating);
+                });
+            });
 
-            if (messageInput) {
-                messageInput.addEventListener('keypress', function(e) {
-                    if (e.key === 'Enter') {
-                        sendMessage();
+            document.getElementById('ratingInput').addEventListener('mouseleave', function() {
+                updateStars(selectedRating);
+            });
+
+            function updateStars(rating) {
+                ratingStars.forEach((star, index) => {
+                    if (index < rating) {
+                        star.classList.add('rating-star--active');
+                        star.querySelector('svg').setAttribute('fill', 'currentColor');
+                    } else {
+                        star.classList.remove('rating-star--active');
+                        star.querySelector('svg').setAttribute('fill', 'none');
                     }
                 });
             }
 
-            // Scroll automatique vers le bas
-            if (chatMessages) {
-                chatMessages.scrollTop = chatMessages.scrollHeight;
+            function updateRatingHint(rating) {
+                const hints = {
+                    1: 'Très mauvais',
+                    2: 'Mauvais',
+                    3: 'Moyen',
+                    4: 'Bon',
+                    5: 'Excellent'
+                };
+                ratingHint.textContent = hints[rating] || 'Cliquez sur les étoiles pour noter';
             }
 
-            // Mettre en surbrillance l'élément actif dans la sidebar
-            const currentPage = window.location.pathname.split('/').pop() || 'inbox.html';
-            const navItems = document.querySelectorAll('.sidebar__nav-item');
-            navItems.forEach(item => {
-                const href = item.getAttribute('href');
-                if (href === currentPage) {
-                    item.classList.add('sidebar__nav-item--active');
+            // Gestion de la soumission du formulaire
+            const reviewForm = document.getElementById('reviewForm');
+            reviewForm.addEventListener('submit', function(e) {
+                e.preventDefault();
+
+                if (selectedRating === 0) {
+                    alert('Veuillez sélectionner une note');
+                    return;
                 }
+
+                // Récupérer les paramètres de l'URL
+                const urlParams = new URLSearchParams(window.location.search);
+                const driver = urlParams.get('driver');
+                const covoiturageId = urlParams.get('covoiturageId');
+
+                const reviewData = {
+                    id: Date.now(),
+                    author: currentUser.nom,
+                    authorAvatar: `https://ui-avatars.com/api/?name=${encodeURIComponent(currentUser.nom)}&background=3B82F6&color=fff&size=128`,
+                    rating: selectedRating,
+                    type: document.getElementById('reviewType').value,
+                    title: document.getElementById('reviewTitle').value,
+                    comment: document.getElementById('reviewComment').value,
+                    date: new Date().toISOString().split('T')[0],
+                    verified: true,
+                    driver: driver || null,
+                    covoiturageId: covoiturageId || null
+                };
+
+                // Sauvegarder la review (simulation)
+                const reviews = JSON.parse(localStorage.getItem('reviews') || '[]');
+                reviews.unshift(reviewData); // Ajouter au début
+                localStorage.setItem('reviews', JSON.stringify(reviews));
+
+                alert('Votre avis a été publié avec succès !');
+                window.location.href = 'reviews.html';
             });
         });
     </script>
