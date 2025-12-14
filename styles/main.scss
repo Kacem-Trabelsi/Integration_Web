@@ -2984,6 +2984,260 @@ body {
   }
 }
 
+// Colocations Page Styles
+.colocations-section {
+  padding: 2rem 1.5rem;
+  min-height: calc(100vh - 70px);
+}
+
+.colocations-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 2rem;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.colocations-title {
+  font-family: 'Inter', sans-serif;
+  font-size: 2rem;
+  font-weight: 700;
+  color: #111827;
+  margin: 0;
+}
+
+.colocations-filters {
+  display: flex;
+  gap: 1rem;
+  margin-bottom: 2rem;
+  padding: 1.5rem;
+  background-color: $white;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+  flex-wrap: wrap;
+  align-items: flex-end;
+}
+
+.colocations-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(400px, 1fr));
+  gap: 2rem;
+}
+
+.colocation-card {
+  background-color: $white;
+  border-radius: 16px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+
+  &:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+  }
+}
+
+.colocation-map {
+  width: 100%;
+  height: 250px;
+  position: relative;
+  overflow: hidden;
+  border-radius: 16px 16px 0 0;
+}
+
+.colocation-info {
+  padding: 1.5rem;
+  @include flex-column;
+  gap: 1rem;
+}
+
+.colocation-header-info {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 1rem;
+}
+
+.colocation-title-section {
+  flex: 1;
+}
+
+.colocation-title {
+  font-family: 'Inter', sans-serif;
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: #111827;
+  margin: 0 0 0.5rem 0;
+  line-height: 1.3;
+}
+
+.colocation-address {
+  font-family: 'Inter', sans-serif;
+  font-size: 0.9rem;
+  color: $dark-gray;
+  margin: 0;
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+}
+
+.colocation-price-section {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  flex-shrink: 0;
+}
+
+.colocation-price {
+  font-family: 'Inter', sans-serif;
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: #10B981;
+  line-height: 1;
+}
+
+.colocation-price-period {
+  font-family: 'Inter', sans-serif;
+  font-size: 0.75rem;
+  color: $dark-gray;
+  margin-top: 0.25rem;
+}
+
+.colocation-details {
+  display: flex;
+  gap: 1.5rem;
+  flex-wrap: wrap;
+  padding: 1rem 0;
+  border-top: 1px solid $light-gray;
+  border-bottom: 1px solid $light-gray;
+}
+
+.colocation-detail-item {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-family: 'Inter', sans-serif;
+  font-size: 0.9rem;
+  color: #111827;
+  font-weight: 500;
+}
+
+.colocation-description {
+  font-family: 'Inter', sans-serif;
+  font-size: 0.95rem;
+  color: $dark-gray;
+  line-height: 1.6;
+  margin: 0;
+}
+
+.colocation-amenities {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.colocation-amenity {
+  padding: 0.4rem 0.75rem;
+  background-color: #f0fdf4;
+  color: #10B981;
+  border-radius: 6px;
+  font-family: 'Inter', sans-serif;
+  font-size: 0.85rem;
+  font-weight: 500;
+}
+
+.colocation-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-top: 1rem;
+  border-top: 1px solid $light-gray;
+}
+
+.colocation-owner {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.colocation-owner-img {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.colocation-owner-name {
+  font-family: 'Inter', sans-serif;
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: #111827;
+}
+
+// Styles pour le marqueur de localisation
+.marker-circle--location {
+  background-color: #10B981;
+  width: 20px;
+  height: 20px;
+  border: 3px solid $white;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+}
+
+// Colocations Media Queries
+@media (max-width: 1024px) {
+  .colocations-grid {
+    grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+  }
+}
+
+@media (max-width: 768px) {
+  .colocations-header {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .colocations-title {
+    font-size: 1.5rem;
+  }
+
+  .colocations-filters {
+    flex-direction: column;
+  }
+
+  .filter-group {
+    width: 100%;
+  }
+
+  .btn--search {
+    width: 100%;
+    justify-content: center;
+  }
+
+  .colocations-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .colocation-header-info {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .colocation-price-section {
+    align-items: flex-start;
+  }
+
+  .colocation-footer {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1rem;
+  }
+
+  .chat-link {
+    align-self: flex-end;
+  }
+}
+
 // Proposer Trajet Page Styles
 .proposer-trajet-section {
   padding: 2rem 1.5rem;
@@ -3345,10 +3599,275 @@ body {
   }
 }
 
+// Gallery Styles for Colocation Details
+.details-gallery {
+  background-color: $white;
+  border-radius: 16px;
+  padding: 1.5rem;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  @include flex-column;
+  gap: 1rem;
+}
+
+.gallery-main {
+  position: relative;
+  width: 100%;
+  height: 500px;
+  border-radius: 12px;
+  overflow: hidden;
+  background-color: #f3f4f6;
+
+  img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: opacity 0.3s ease;
+  }
+}
+
+.gallery-prev,
+.gallery-next {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background-color: rgba(255, 255, 255, 0.9);
+  border: none;
+  border-radius: 50%;
+  width: 48px;
+  height: 48px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  z-index: 10;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+
+  svg {
+    width: 24px;
+    height: 24px;
+    color: #111827;
+  }
+
+  &:hover {
+    background-color: $white;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+    transform: translateY(-50%) scale(1.1);
+  }
+}
+
+.gallery-prev {
+  left: 1rem;
+}
+
+.gallery-next {
+  right: 1rem;
+}
+
+.gallery-thumbnails {
+  display: flex;
+  gap: 0.75rem;
+  overflow-x: auto;
+  padding: 0.5rem 0;
+
+  &::-webkit-scrollbar {
+    height: 6px;
+  }
+
+  &::-webkit-scrollbar-track {
+    background: #f1f1f1;
+    border-radius: 3px;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background: #888;
+    border-radius: 3px;
+
+    &:hover {
+      background: #555;
+    }
+  }
+}
+
+.gallery-thumbnail {
+  flex-shrink: 0;
+  width: 120px;
+  height: 90px;
+  border-radius: 8px;
+  overflow: hidden;
+  cursor: pointer;
+  border: 3px solid transparent;
+  transition: all 0.3s ease;
+  opacity: 0.7;
+
+  img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  &:hover {
+    opacity: 1;
+    border-color: $primary-blue;
+  }
+
+  &.active {
+    opacity: 1;
+    border-color: $primary-blue;
+    box-shadow: 0 2px 8px rgba(59, 130, 246, 0.3);
+  }
+}
+
+.details-address {
+  font-family: 'Inter', sans-serif;
+  font-size: 1.1rem;
+  color: $dark-gray;
+  margin: 0.5rem 0 0 0;
+  display: flex;
+  align-items: center;
+}
+
+.details-amenities {
+  background-color: $white;
+  border-radius: 16px;
+  padding: 2rem;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.amenities-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 1rem;
+}
+
+.amenity-item {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.75rem 1rem;
+  background-color: #f0fdf4;
+  border-radius: 8px;
+  font-family: 'Inter', sans-serif;
+  font-size: 0.95rem;
+  color: #10B981;
+  font-weight: 500;
+
+  svg {
+    width: 20px;
+    height: 20px;
+    flex-shrink: 0;
+  }
+}
+
+// Reservation Popup
+.reservation-popup {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 10000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.reservation-popup__overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(4px);
+}
+
+.reservation-popup__content {
+  position: relative;
+  background-color: $white;
+  border-radius: 16px;
+  padding: 2.5rem;
+  max-width: 400px;
+  width: 90%;
+  text-align: center;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+  animation: popupSlideIn 0.3s ease-out;
+}
+
+@keyframes popupSlideIn {
+  from {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.reservation-popup__icon {
+  width: 64px;
+  height: 64px;
+  background-color: #d1fae5;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 1.5rem;
+  color: #10B981;
+
+  svg {
+    width: 32px;
+    height: 32px;
+  }
+}
+
+.reservation-popup__title {
+  font-family: 'Inter', sans-serif;
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: #111827;
+  margin: 0 0 0.75rem 0;
+}
+
+.reservation-popup__message {
+  font-family: 'Inter', sans-serif;
+  font-size: 1rem;
+  color: $dark-gray;
+  margin: 0 0 1.5rem 0;
+  line-height: 1.6;
+}
+
+.reservation-popup__btn {
+  width: 100%;
+  padding: 0.875rem 1.5rem;
+  background-color: $primary-blue;
+  color: $white;
+  border: none;
+  border-radius: 8px;
+  font-family: 'Inter', sans-serif;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+
+  &:hover {
+    background-color: $dark-blue;
+  }
+}
+
 // Details Media Queries
 @media (max-width: 1024px) {
   .details-content {
     grid-template-columns: 1fr;
+  }
+
+  .gallery-main {
+    height: 400px;
+  }
+
+  .amenities-grid {
+    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
   }
 
   .details-sidebar {
@@ -3379,6 +3898,19 @@ body {
 
   .map-container-details {
     height: 300px;
+  }
+
+  .gallery-main {
+    height: 300px;
+  }
+
+  .gallery-thumbnail {
+    width: 80px;
+    height: 60px;
+  }
+
+  .amenities-grid {
+    grid-template-columns: 1fr;
   }
 }
 

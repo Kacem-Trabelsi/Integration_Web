@@ -1,0 +1,711 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Détails de la colocation - COLLOCOV">
+    <title>Détails de la colocation - COLLOCOV</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+    <link rel="stylesheet" href="dist/css/main.css">
+    <style>
+        .leaflet-container {
+            font-family: 'Inter', sans-serif;
+        }
+        .dashboard-layout .sidebar {
+            width: 280px !important;
+            min-width: 280px !important;
+            max-width: 280px !important;
+        }
+        @media (max-width: 1024px) {
+            .dashboard-layout .sidebar {
+                width: 240px !important;
+                min-width: 240px !important;
+                max-width: 240px !important;
+            }
+        }
+        @media (max-width: 768px) {
+            .dashboard-layout .sidebar {
+                width: 100% !important;
+                min-width: 100% !important;
+                max-width: 100% !important;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header Navigation -->
+    <header class="header">
+        <nav class="nav container">
+            <div class="nav__logo">
+                <a href="index.html" class="logo-link">/COLLOCOV</a>
+            </div>
+            <ul class="nav__menu">
+                <li class="nav__item"><a href="index.html" class="nav__link">Acceuil</a></li>
+                <li class="nav__item"><a href="contact.html" class="nav__link">Contact</a></li>
+                <li class="nav__item"><a href="urgence.html" class="nav__link">urgence</a></li>
+            </ul>
+            <div class="nav__actions">
+                <div class="nav__profile">
+                    <button class="nav__profile-btn" id="profileBtn" aria-label="Menu profil">
+                        <img src="https://ui-avatars.com/api/?name=User&background=3B82F6&color=fff&size=128" alt="Profile" class="nav__profile-img" id="profileImg">
+                    </button>
+                    <div class="nav__dropdown" id="profileDropdown">
+                        <a href="#" class="nav__dropdown-item" onclick="window.location.href='profile.html'; return false;">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                                <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+                                <circle cx="12" cy="7" r="4"></circle>
+                            </svg>
+                            My profile
+                        </a>
+                        <div class="nav__dropdown-divider"></div>
+                        <div class="nav__dropdown-user" id="dropdownUserName"></div>
+                        <button class="nav__dropdown-item nav__dropdown-item--logout" onclick="logoutUser()">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                                <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path>
+                                <polyline points="16 17 21 12 16 7"></polyline>
+                                <line x1="21" y1="12" x2="9" y2="12"></line>
+                            </svg>
+                            Déconnexion
+                        </button>
+                    </div>
+                </div>
+            </div>
+            <button class="nav__toggle" aria-label="Toggle menu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+        </nav>
+    </header>
+
+    <!-- Main Content -->
+    <main class="main">
+        <div class="dashboard-layout">
+            <!-- Sidebar Navigation -->
+            <aside class="sidebar">
+                <div class="sidebar__header">
+                    <div class="sidebar__user">
+                        <img src="https://ui-avatars.com/api/?name=User&background=3B82F6&color=fff&size=128" alt="Profile" class="sidebar__user-img" id="sidebarProfileImg">
+                        <span class="sidebar__user-name" id="sidebarUserName">Utilisateur</span>
+                    </div>
+                    <div class="sidebar__icons">
+                        <button class="sidebar__icon-btn" id="messagesBtn" aria-label="Messages" onclick="window.location.href='inbox.html'">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>
+                            </svg>
+                            <span class="sidebar__icon-badge" id="messagesBadge">0</span>
+                        </button>
+                        <button class="sidebar__icon-btn" id="notificationsBtn" aria-label="Notifications" onclick="window.location.href='notifications.html'">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"></path>
+                                <path d="M13.73 21a2 2 0 0 1-3.46 0"></path>
+                            </svg>
+                            <span class="sidebar__icon-badge" id="notificationsBadge">0</span>
+                        </button>
+                    </div>
+                </div>
+                <nav class="sidebar__nav">
+                    <a href="dashboard.html" class="sidebar__nav-item">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <rect x="3" y="3" width="7" height="7"></rect>
+                            <rect x="14" y="3" width="7" height="7"></rect>
+                            <rect x="14" y="14" width="7" height="7"></rect>
+                            <rect x="3" y="14" width="7" height="7"></rect>
+                        </svg>
+                        <span>Tableau de bord</span>
+                    </a>
+                    <a href="covoiturages.html" class="sidebar__nav-item">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M5 17H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2h-1"></path>
+                            <polygon points="12 15 17 21 7 21 12 15"></polygon>
+                        </svg>
+                        <span>Liste des covoiturages</span>
+                    </a>
+                    <a href="colocations.html" class="sidebar__nav-item">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
+                            <polyline points="9 22 9 12 15 12 15 22"></polyline>
+                        </svg>
+                        <span>Liste des colocations</span>
+                    </a>
+                    <a href="profile.html" class="sidebar__nav-item">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+                            <circle cx="12" cy="7" r="4"></circle>
+                        </svg>
+                        <span>My profile</span>
+                    </a>
+                    <a href="reviews.html" class="sidebar__nav-item">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon>
+                        </svg>
+                        <span>Liste des reviews</span>
+                    </a>
+                </nav>
+            </aside>
+
+            <!-- Details Content -->
+            <div class="dashboard-main">
+                <div class="container">
+                    <div class="details-section" id="detailsSection">
+                        <div style="text-align: center; padding: 4rem 2rem;">
+                            <p style="font-family: 'Inter', sans-serif; font-size: 1.1rem; color: #666;">Chargement...</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer__content">
+                <div class="footer__section footer__about">
+                    <h3 class="footer__logo">/COLLOCOV</h3>
+                    <p class="footer__description">
+                        La plateforme qui connecte les étudiants pour la colocation et le covoiturage. 
+                        Libère ton potentiel étudiant avec nous.
+                    </p>
+                </div>
+                <div class="footer__section">
+                    <h4 class="footer__title">Liens rapides</h4>
+                    <ul class="footer__links">
+                        <li><a href="index.html" class="footer__link">Acceuil</a></li>
+                        <li><a href="#" class="footer__link">À propos</a></li>
+                        <li><a href="#" class="footer__link">Contact</a></li>
+                        <li><a href="#" class="footer__link">Tarifs</a></li>
+                    </ul>
+                </div>
+                <div class="footer__section">
+                    <h4 class="footer__title">Services</h4>
+                    <ul class="footer__links">
+                        <li><a href="#" class="footer__link">Colocation Étudiante</a></li>
+                        <li><a href="#" class="footer__link">Covoiturage</a></li>
+                        <li><a href="urgence.html" class="footer__link">Urgence</a></li>
+                        <li><a href="#" class="footer__link">FAQ</a></li>
+                    </ul>
+                </div>
+                <div class="footer__section">
+                    <h4 class="footer__title">Contact</h4>
+                    <ul class="footer__links">
+                        <li><a href="mailto:contact@collocov.com" class="footer__link">contact@collocov.com</a></li>
+                        <li><a href="tel:+33123456789" class="footer__link">+33 1 23 45 67 89</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer__bottom">
+                <p class="footer__copyright">
+                    &copy; 2024 COLLOCOV. Tous droits réservés.
+                </p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    <script src="js/auth.js"></script>
+    <script src="js/main.js"></script>
+    <script>
+        // Données de colocations (simulées) - même structure que dans colocations.html
+        const colocationsData = [
+            {
+                id: 1,
+                title: 'Appartement moderne à Ariana',
+                address: 'Ariana Soghra, Tunis',
+                lat: 36.8625,
+                lng: 10.1956,
+                price: 350,
+                rooms: 2,
+                availableRooms: 1,
+                type: 'appartement',
+                owner: 'Marie Martin',
+                description: 'Bel appartement moderne situé à proximité de l\'ESPRIT. Chambre disponible dans une colocation étudiante conviviale. L\'appartement est entièrement meublé et équipé. Proche des transports en commun et des commerces. Parfait pour un étudiant cherchant un logement confortable et bien situé.',
+                fullDescription: 'Cet appartement spacieux de 2 chambres est idéalement situé dans le quartier d\'Ariana Soghra, à seulement 10 minutes à pied de l\'ESPRIT. La chambre disponible est lumineuse, meublée et dispose d\'un grand placard. L\'appartement comprend un salon moderne, une cuisine équipée, une salle de bain partagée et un balcon avec vue. Le quartier est calme, sécurisé et bien desservi par les transports en commun. De nombreux commerces, restaurants et cafés sont à proximité.',
+                amenities: ['WiFi', 'Chauffage', 'Meublé', 'Parking'],
+                images: [
+                    'https://images.unsplash.com/photo-1522708323590-d24dbb6b0267?w=800&h=600&fit=crop',
+                    'https://images.unsplash.com/photo-1502672260266-1c1ef2d93688?w=800&h=600&fit=crop',
+                    'https://images.unsplash.com/photo-1554995207-c18c203602cb?w=800&h=600&fit=crop',
+                    'https://images.unsplash.com/photo-1560448204-e02f11c3d0e2?w=800&h=600&fit=crop',
+                    'https://images.unsplash.com/photo-1560448075-cbc16bb4af90?w=800&h=600&fit=crop&auto=format'
+                ]
+            },
+            {
+                id: 2,
+                title: 'Maison spacieuse à Lac',
+                address: 'Lac 1, Tunis',
+                lat: 36.8381,
+                lng: 10.2408,
+                price: 450,
+                rooms: 3,
+                availableRooms: 2,
+                type: 'maison',
+                owner: 'Pierre Dupont',
+                description: 'Grande maison avec jardin, 2 chambres disponibles pour étudiants',
+                fullDescription: 'Magnifique maison de 3 chambres avec jardin privé dans le quartier du Lac. Deux chambres sont disponibles pour des étudiants. La maison dispose d\'un grand salon, d\'une cuisine moderne entièrement équipée, de deux salles de bain et d\'un jardin aménagé parfait pour se détendre. Le quartier est résidentiel, calme et proche du lac de Tunis. Idéal pour les étudiants qui apprécient l\'espace et la tranquillité.',
+                amenities: ['WiFi', 'Jardin', 'Meublé', 'Parking', 'Climatisation'],
+                images: [
+                    'https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?w=800&h=600&fit=crop',
+                    'https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=800&h=600&fit=crop',
+                    'https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?w=800&h=600&fit=crop',
+                    'https://images.unsplash.com/photo-1600607687644-c7171b42498b?w=800&h=600&fit=crop&auto=format',
+                    'https://images.unsplash.com/photo-1600566753190-17f0baa2a6c3?w=800&h=600&fit=crop&auto=format'
+                ]
+            },
+            {
+                id: 3,
+                title: 'Studio cosy à Manouba',
+                address: 'Manouba Centre',
+                lat: 36.8078,
+                lng: 10.0972,
+                price: 280,
+                rooms: 1,
+                availableRooms: 1,
+                type: 'studio',
+                owner: 'Sophie Bernard',
+                description: 'Studio meublé et équipé, parfait pour un étudiant',
+                fullDescription: 'Studio moderne et fonctionnel de 25m², entièrement meublé et équipé. Idéal pour un étudiant cherchant son indépendance. Le studio comprend une pièce principale avec coin cuisine intégré, une salle de bain privée et un grand placard. Situé au centre de Manouba, proche de l\'université et des commerces. Transport en commun facilement accessible.',
+                amenities: ['WiFi', 'Meublé', 'Climatisation'],
+                images: [
+                    'https://images.unsplash.com/photo-1522771739844-6a9f6d5f14af?w=800&h=600&fit=crop',
+                    'https://images.unsplash.com/photo-1505693416388-ac5ce068fe85?w=800&h=600&fit=crop',
+                    'https://images.unsplash.com/photo-1556911220-bff31c812dba?w=800&h=600&fit=crop',
+                    'https://images.unsplash.com/photo-1556911220-e15b29be8c8f?w=800&h=600&fit=crop&auto=format',
+                    'https://images.unsplash.com/photo-1560448075-cbc16bb4af90?w=800&h=600&fit=crop&auto=format'
+                ]
+            },
+            {
+                id: 4,
+                title: 'Appartement lumineux à Tunis Centre',
+                address: 'Tunis Centre',
+                lat: 36.8065,
+                lng: 10.1815,
+                price: 400,
+                rooms: 2,
+                availableRooms: 1,
+                type: 'appartement',
+                owner: 'Ahmed Ben Ali',
+                description: 'Appartement bien situé, proche des transports en commun',
+                fullDescription: 'Appartement lumineux de 2 chambres au cœur de Tunis. Une chambre est disponible dans cette colocation étudiante. L\'appartement bénéficie d\'une excellente exposition et d\'une vue dégagée. Il comprend un salon spacieux, une cuisine équipée, une salle de bain et un balcon. Situé dans le centre-ville, à proximité immédiate des transports en commun, des universités et de tous les commerces. Quartier animé et sécurisé.',
+                amenities: ['WiFi', 'Chauffage', 'Meublé', 'Balcon'],
+                images: [
+                    'https://images.unsplash.com/photo-1505843513577-22bb7d21e455?w=800&h=600&fit=crop',
+                    'https://images.unsplash.com/photo-1502672260266-1c1ef2d93688?w=800&h=600&fit=crop',
+                    'https://images.unsplash.com/photo-1554995207-c18c203602cb?w=800&h=600&fit=crop',
+                    'https://images.unsplash.com/photo-1560448204-e02f11c3d0e2?w=800&h=600&fit=crop'
+                ]
+            }
+        ];
+
+        // Fonction pour initialiser une carte
+        function initColocationMap(mapId, lat, lng, address) {
+            const map = L.map(mapId, {
+                zoomControl: true,
+                attributionControl: false
+            }).setView([lat, lng], 15);
+
+            L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                maxZoom: 19,
+                attribution: '© OpenStreetMap contributors'
+            }).addTo(map);
+
+            const locationIcon = L.divIcon({
+                className: 'custom-marker custom-marker--location',
+                html: '<div class="marker-circle marker-circle--location"></div>',
+                iconSize: [20, 20],
+                iconAnchor: [10, 10]
+            });
+
+            L.marker([lat, lng], { icon: locationIcon }).addTo(map)
+                .bindPopup(`<strong>${address}</strong>`);
+
+            return map;
+        }
+
+        // Vérifier si l'utilisateur est connecté
+        document.addEventListener('DOMContentLoaded', function() {
+            try {
+                // Vérifier que la fonction isLoggedIn existe
+                if (typeof isLoggedIn !== 'function') {
+                    console.error('La fonction isLoggedIn n\'est pas définie. Vérifiez que auth.js est chargé.');
+                    const detailsSection = document.getElementById('detailsSection');
+                    if (detailsSection) {
+                        detailsSection.innerHTML = `
+                            <div style="text-align: center; padding: 4rem 2rem;">
+                                <h2 style="font-family: 'Inter', sans-serif; color: #111827; margin-bottom: 1rem;">Erreur de chargement</h2>
+                                <p style="font-family: 'Inter', sans-serif; color: #666; margin-bottom: 2rem;">Les scripts nécessaires ne sont pas chargés. Veuillez recharger la page.</p>
+                                <button class="btn btn--primary" onclick="window.location.reload()">Recharger</button>
+                            </div>
+                        `;
+                    }
+                    return;
+                }
+                
+                const currentUser = isLoggedIn();
+                
+                if (!currentUser) {
+                    const detailsSection = document.getElementById('detailsSection');
+                    if (detailsSection) {
+                        detailsSection.innerHTML = `
+                            <div style="text-align: center; padding: 4rem 2rem;">
+                                <h2 style="font-family: 'Inter', sans-serif; color: #111827; margin-bottom: 1rem;">Connexion requise</h2>
+                                <p style="font-family: 'Inter', sans-serif; color: #666; margin-bottom: 2rem;">Vous devez être connecté pour voir les détails de cette colocation.</p>
+                                <button class="btn btn--primary" onclick="window.location.href='connexion.html'">Se connecter</button>
+                            </div>
+                        `;
+                    }
+                    return;
+                }
+                
+                // Mettre à jour l'image de profil
+                const profileImg = document.getElementById('profileImg');
+                if (profileImg) {
+                    const userName = currentUser.nom || 'User';
+                    profileImg.src = `https://ui-avatars.com/api/?name=${encodeURIComponent(userName)}&background=3B82F6&color=fff&size=128`;
+                }
+                
+                const sidebarProfileImg = document.getElementById('sidebarProfileImg');
+                if (sidebarProfileImg) {
+                    const userName = currentUser.nom || 'User';
+                    sidebarProfileImg.src = `https://ui-avatars.com/api/?name=${encodeURIComponent(userName)}&background=3B82F6&color=fff&size=128`;
+                }
+                
+                const sidebarUserName = document.getElementById('sidebarUserName');
+                if (sidebarUserName) {
+                    sidebarUserName.textContent = currentUser.nom;
+                }
+                
+                const dropdownUserName = document.getElementById('dropdownUserName');
+                if (dropdownUserName) {
+                    dropdownUserName.textContent = currentUser.nom;
+                }
+                
+                // Gestion du menu déroulant du profil
+                const profileBtn = document.getElementById('profileBtn');
+                const profileDropdown = document.getElementById('profileDropdown');
+                
+                if (profileBtn && profileDropdown) {
+                    profileBtn.addEventListener('click', function(e) {
+                        e.stopPropagation();
+                        profileDropdown.classList.toggle('active');
+                    });
+                    
+                    document.addEventListener('click', function(e) {
+                        if (!profileBtn.contains(e.target) && !profileDropdown.contains(e.target)) {
+                            profileDropdown.classList.remove('active');
+                        }
+                    });
+                }
+
+                // Récupérer l'ID de la colocation depuis l'URL
+                const urlParams = new URLSearchParams(window.location.search);
+                const colocationId = parseInt(urlParams.get('id'));
+
+                if (!colocationId) {
+                    const detailsSection = document.getElementById('detailsSection');
+                    if (detailsSection) {
+                        detailsSection.innerHTML = `
+                            <div style="text-align: center; padding: 4rem 2rem;">
+                                <h2 style="font-family: 'Inter', sans-serif; color: #111827; margin-bottom: 1rem;">Colocation introuvable</h2>
+                                <p style="font-family: 'Inter', sans-serif; color: #666; margin-bottom: 2rem;">L'ID de la colocation est manquant.</p>
+                                <button class="btn btn--primary" onclick="window.location.href='colocations.html'">Retour à la liste</button>
+                            </div>
+                        `;
+                    }
+                    return;
+                }
+
+                // Trouver la colocation correspondante
+                const colocation = colocationsData.find(c => c.id === colocationId);
+
+                if (!colocation) {
+                    const detailsSection = document.getElementById('detailsSection');
+                    if (detailsSection) {
+                        detailsSection.innerHTML = `
+                            <div style="text-align: center; padding: 4rem 2rem;">
+                                <h2 style="font-family: 'Inter', sans-serif; color: #111827; margin-bottom: 1rem;">Colocation introuvable</h2>
+                                <p style="font-family: 'Inter', sans-serif; color: #666; margin-bottom: 2rem;">La colocation demandée n'existe pas.</p>
+                                <button class="btn btn--primary" onclick="window.location.href='colocations.html'">Retour à la liste</button>
+                            </div>
+                        `;
+                    }
+                    return;
+                }
+
+            const typeLabel = {
+                'appartement': 'Appartement',
+                'maison': 'Maison',
+                'studio': 'Studio'
+            }[colocation.type] || colocation.type;
+
+                // Afficher les détails
+                const detailsSection = document.getElementById('detailsSection');
+                
+                if (!detailsSection) {
+                    console.error('Element detailsSection introuvable');
+                    return;
+                }
+            
+            // Générer la galerie d'images
+            const mainImage = colocation.images && colocation.images.length > 0 ? colocation.images[0] : 'https://images.unsplash.com/photo-1522708323590-d24dbb6b0267?w=800&h=600&fit=crop';
+            const thumbnails = (colocation.images || []).map((img, index) => `
+                <div class="gallery-thumbnail ${index === 0 ? 'active' : ''}" data-index="${index}">
+                    <img src="${img}" alt="Photo ${index + 1}" loading="lazy" onerror="this.onerror=null; this.src='https://images.unsplash.com/photo-1522708323590-d24dbb6b0267?w=800&h=600&fit=crop';">
+                </div>
+            `).join('');
+
+            detailsSection.innerHTML = `
+                <button class="btn-back" onclick="window.location.href='colocations.html'">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <polyline points="15 18 9 12 15 6"></polyline>
+                    </svg>
+                    Retour
+                </button>
+
+                <div class="details-content">
+                    <div class="details-main">
+                        <div class="details-header">
+                            <h1 class="details-title">${colocation.title}</h1>
+                            <p class="details-address">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width: 20px; height: 20px; display: inline-block; vertical-align: middle; margin-right: 0.5rem;">
+                                    <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
+                                    <circle cx="12" cy="10" r="3"></circle>
+                                </svg>
+                                ${colocation.address}
+                            </p>
+                        </div>
+
+                        <div class="details-gallery">
+                            <div class="gallery-main">
+                                <img src="${mainImage}" alt="${colocation.title}" id="mainImage" onerror="this.src='https://images.unsplash.com/photo-1522708323590-d24dbb6b0267?w=800&h=600&fit=crop';">
+                                <button class="gallery-prev" id="galleryPrev" aria-label="Image précédente">
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                        <polyline points="15 18 9 12 15 6"></polyline>
+                                    </svg>
+                                </button>
+                                <button class="gallery-next" id="galleryNext" aria-label="Image suivante">
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                        <polyline points="9 18 15 12 9 6"></polyline>
+                                    </svg>
+                                </button>
+                            </div>
+                            <div class="gallery-thumbnails">
+                                ${thumbnails}
+                            </div>
+                        </div>
+
+                        <div class="details-info">
+                            <h2 class="details-subtitle">Informations</h2>
+                            <div class="info-grid">
+                                <div class="info-item">
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                        <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
+                                        <polyline points="9 22 9 12 15 12 15 22"></polyline>
+                                    </svg>
+                                    <div>
+                                        <p class="info-label">Type</p>
+                                        <p class="info-value">${typeLabel}</p>
+                                    </div>
+                                </div>
+                                <div class="info-item">
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                        <rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect>
+                                    </svg>
+                                    <div>
+                                        <p class="info-label">Chambres</p>
+                                        <p class="info-value">${colocation.rooms} chambre${colocation.rooms > 1 ? 's' : ''}</p>
+                                    </div>
+                                </div>
+                                <div class="info-item">
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                        <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
+                                        <circle cx="9" cy="7" r="4"></circle>
+                                        <path d="M23 21v-2a4 4 0 0 0-3-3.87"></path>
+                                        <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
+                                    </svg>
+                                    <div>
+                                        <p class="info-label">Chambres disponibles</p>
+                                        <p class="info-value">${colocation.availableRooms} disponible${colocation.availableRooms > 1 ? 's' : ''}</p>
+                                    </div>
+                                </div>
+                                <div class="info-item">
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                        <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+                                        <circle cx="12" cy="7" r="4"></circle>
+                                    </svg>
+                                    <div>
+                                        <p class="info-label">Propriétaire</p>
+                                        <p class="info-value">${colocation.owner}</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="details-description">
+                            <h2 class="details-subtitle">Description</h2>
+                            <p class="description-text">${colocation.fullDescription || colocation.description}</p>
+                        </div>
+
+                        <div class="details-amenities">
+                            <h2 class="details-subtitle">Équipements</h2>
+                            <div class="amenities-grid">
+                                ${colocation.amenities.map(amenity => `
+                                    <div class="amenity-item">
+                                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                            <polyline points="20 6 9 17 4 12"></polyline>
+                                        </svg>
+                                        <span>${amenity}</span>
+                                    </div>
+                                `).join('')}
+                            </div>
+                        </div>
+
+                        <div class="details-map">
+                            <h2 class="details-subtitle">Localisation</h2>
+                            <div class="map-container-details" id="mapDetails"></div>
+                        </div>
+                    </div>
+
+                    <div class="details-sidebar">
+                        <div class="reservation-card">
+                            <div class="reservation-price">
+                                <span class="price-amount">${colocation.price} DT</span>
+                                <span class="price-label">par mois</span>
+                            </div>
+                            <button class="btn btn--primary btn--reserve" id="reserveBtn">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
+                                    <polyline points="9 22 9 12 15 12 15 22"></polyline>
+                                </svg>
+                                Réserver
+                            </button>
+                            <a href="inbox.html" class="btn btn--outline btn--chat">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>
+                                </svg>
+                                Contacter le propriétaire
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            `;
+
+                // Initialiser la carte
+                setTimeout(() => {
+                    initColocationMap(
+                        'mapDetails',
+                        colocation.lat,
+                        colocation.lng,
+                        colocation.address
+                    );
+                }, 100);
+
+                // Gestion de la galerie d'images - attendre que le DOM soit mis à jour
+                setTimeout(() => {
+                    let currentImageIndex = 0;
+                    const mainImageEl = document.getElementById('mainImage');
+                    const thumbnailElements = document.querySelectorAll('.gallery-thumbnail');
+                    const prevBtn = document.getElementById('galleryPrev');
+                    const nextBtn = document.getElementById('galleryNext');
+
+                    function updateMainImage(index) {
+                        if (colocation.images && colocation.images[index] && mainImageEl) {
+                            mainImageEl.src = colocation.images[index];
+                            currentImageIndex = index;
+                            
+                            // Mettre à jour les thumbnails actives
+                            thumbnailElements.forEach((thumb, i) => {
+                                thumb.classList.toggle('active', i === index);
+                            });
+                        }
+                    }
+
+                    if (prevBtn) {
+                        prevBtn.addEventListener('click', () => {
+                            const newIndex = currentImageIndex > 0 ? currentImageIndex - 1 : (colocation.images ? colocation.images.length - 1 : 0);
+                            updateMainImage(newIndex);
+                        });
+                    }
+
+                    if (nextBtn) {
+                        nextBtn.addEventListener('click', () => {
+                            const maxIndex = colocation.images ? colocation.images.length - 1 : 0;
+                            const newIndex = currentImageIndex < maxIndex ? currentImageIndex + 1 : 0;
+                            updateMainImage(newIndex);
+                        });
+                    }
+
+                    thumbnailElements.forEach((thumb, index) => {
+                        thumb.addEventListener('click', () => {
+                            updateMainImage(index);
+                        });
+                    });
+                }, 200);
+
+                // Gestion du bouton Réserver
+                const reserveBtn = document.getElementById('reserveBtn');
+                if (reserveBtn) {
+                    reserveBtn.addEventListener('click', function() {
+                        if (confirm(`Voulez-vous réserver cette colocation pour ${colocation.price} DT/mois ?`)) {
+                            // Sauvegarder temporairement les données de réservation pour la page de paiement
+                            const reservationData = {
+                                id: Date.now(),
+                                colocationId: colocation.id,
+                                userId: currentUser.userId,
+                                title: colocation.title,
+                                address: colocation.address,
+                                price: colocation.price,
+                                owner: colocation.owner,
+                                dateReservation: new Date().toISOString(),
+                                status: 'pending',
+                                type: 'colocation'
+                            };
+                            localStorage.setItem('pendingReservation', JSON.stringify(reservationData));
+                            
+                            // Afficher la popup de confirmation personnalisée
+                            showReservationSuccessPopup();
+                        }
+                    });
+                }
+
+                // Fonction pour afficher la popup de succès
+                function showReservationSuccessPopup() {
+                    const popup = document.createElement('div');
+                    popup.className = 'reservation-popup';
+                    popup.innerHTML = `
+                        <div class="reservation-popup__overlay"></div>
+                        <div class="reservation-popup__content">
+                            <div class="reservation-popup__icon">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path>
+                                    <polyline points="22 4 12 14.01 9 11.01"></polyline>
+                                </svg>
+                            </div>
+                            <h3 class="reservation-popup__title">Réservation effectuée</h3>
+                            <p class="reservation-popup__message">Votre demande de réservation a été enregistrée avec succès !</p>
+                            <button class="reservation-popup__btn" onclick="window.location.href='paiement.html'">Procéder au paiement</button>
+                        </div>
+                    `;
+                    document.body.appendChild(popup);
+                }
+            } catch (error) {
+                console.error('Erreur lors du chargement de la page:', error);
+                const detailsSection = document.getElementById('detailsSection');
+                if (detailsSection) {
+                    detailsSection.innerHTML = `
+                        <div style="text-align: center; padding: 4rem 2rem;">
+                            <h2 style="font-family: 'Inter', sans-serif; color: #111827; margin-bottom: 1rem;">Erreur</h2>
+                            <p style="font-family: 'Inter', sans-serif; color: #666; margin-bottom: 2rem;">Une erreur est survenue lors du chargement de la page.</p>
+                            <button class="btn btn--primary" onclick="window.location.href='colocations.html'">Retour à la liste</button>
+                        </div>
+                    `;
+                }
+            }
+        });
+    </script>
+</body>
+</html>
+
