@@ -337,6 +337,147 @@ Pour toute question ou problème :
 - Email : contact@collocov.com
 - Téléphone : +33 1 23 45 67 89
 
+## 🚀 Déploiement sur Vercel
+
+### Prérequis
+
+- ✅ Un compte GitHub avec le projet poussé
+- ✅ Un compte Vercel (gratuit) - [Créer un compte](https://vercel.com/signup)
+
+### Méthode 1 : Déploiement via l'interface web Vercel (Recommandé)
+
+1. **Créer un compte Vercel**
+   - Allez sur [vercel.com](https://vercel.com)
+   - Cliquez sur **Sign Up** et connectez-vous avec GitHub
+   - Autorisez Vercel à accéder à vos dépôts GitHub
+
+2. **Importer le projet**
+   - Une fois connecté, cliquez sur **Add New Project** ou **Import Project**
+   - Sélectionnez le dépôt `Integration_Web` (ou `Kacem-Trabelsi/Integration_Web`)
+   - Cliquez sur **Import**
+
+3. **Configuration du projet**
+   Vercel détectera automatiquement la configuration grâce au fichier `vercel.json`, mais vous pouvez vérifier :
+   - **Framework Preset** : Other (ou laisser vide)
+   - **Root Directory** : `./` (par défaut)
+   - **Build Command** : `npm run build` (déjà configuré dans vercel.json)
+   - **Output Directory** : `./` (par défaut)
+   - **Install Command** : `npm install` (par défaut)
+
+4. **Variables d'environnement** (optionnel)
+   - Aucune variable d'environnement nécessaire pour ce projet
+   - Vous pouvez ajouter des variables plus tard si nécessaire
+
+5. **Déployer**
+   - Cliquez sur **Deploy**
+   - Vercel va automatiquement :
+     - Installer les dépendances (`npm install`)
+     - Exécuter `npm run build` pour compiler les styles SASS et TailwindCSS
+     - Déployer tous les fichiers HTML, CSS, JS et images
+   - Le processus prend généralement 1-2 minutes
+
+6. **Accéder à votre site**
+   - Une fois le déploiement terminé, vous recevrez une URL
+   - Exemple : `https://integration-web.vercel.app` ou `https://integration-web-[votre-nom].vercel.app`
+   - Cliquez sur **Visit** pour voir votre site en ligne
+
+### Méthode 2 : Déploiement via Vercel CLI
+
+1. **Installer Vercel CLI globalement**
+   ```bash
+   npm install -g vercel
+   ```
+   
+   Ou avec yarn :
+   ```bash
+   yarn global add vercel
+   ```
+
+2. **Se connecter à Vercel**
+   ```bash
+   vercel login
+   ```
+   - Cela ouvrira votre navigateur pour vous connecter
+   - Autorisez Vercel CLI à accéder à votre compte
+
+3. **Naviguer vers le dossier du projet**
+   ```bash
+   cd C:\Users\Kacem Trabelsi\Desktop\integration_web
+   ```
+
+4. **Déployer le projet (preview)**
+   ```bash
+   vercel
+   ```
+   
+   Suivez les instructions interactives :
+   - **Set up and deploy?** → Y
+   - **Which scope?** → Sélectionnez votre compte/organisation
+   - **Link to existing project?** → N (première fois) ou Y (si déjà déployé)
+   - **Project name?** → `integration-web` (ou votre choix)
+   - **Directory?** → `./` (appuyez sur Entrée pour accepter)
+   - **Override settings?** → N (le fichier vercel.json sera utilisé)
+
+5. **Déployer en production**
+   ```bash
+   vercel --prod
+   ```
+   
+   Cela déploiera sur votre domaine de production (ex: `https://integration-web.vercel.app`)
+
+### Vérification du déploiement
+
+Après le déploiement, vérifiez que :
+- ✅ Le site est accessible via l'URL fournie
+- ✅ Les styles CSS sont bien chargés (pas de page sans style)
+- ✅ Les images s'affichent correctement
+- ✅ La navigation fonctionne
+- ✅ Les pages de détails fonctionnent avec les paramètres d'URL
+
+### Configuration automatique
+
+Le fichier `vercel.json` est déjà configuré avec :
+- ✅ Commande de build : `npm run build` (compile SASS et TailwindCSS)
+- ✅ Output Directory : `.` (dossier racine)
+- ✅ Clean URLs activées
+
+### Mise à jour du déploiement
+
+**Déploiement automatique :**
+- À chaque push sur la branche `main`, Vercel redéploiera automatiquement le projet
+- Vous recevrez une notification par email à chaque déploiement
+
+**Déploiement manuel via CLI :**
+```bash
+vercel --prod
+```
+
+**Note importante :**
+- Le dossier `dist/` est dans `.gitignore` (c'est normal)
+- Vercel générera automatiquement les fichiers CSS compilés lors du build
+- Les fichiers `dist/css/main.css` et `dist/css/tailwind.css` seront créés sur le serveur Vercel
+
+### Variables d'environnement (si nécessaire)
+
+Si vous devez ajouter des variables d'environnement plus tard :
+
+1. **Via l'interface web** :
+   - Allez dans **Project Settings** → **Environment Variables**
+   - Ajoutez vos variables
+
+2. **Via CLI** :
+   ```bash
+   vercel env add VARIABLE_NAME
+   ```
+
+### Domaine personnalisé
+
+Pour ajouter un domaine personnalisé :
+
+1. Allez dans **Project Settings** → **Domains**
+2. Ajoutez votre domaine
+3. Suivez les instructions pour configurer les DNS
+
 ## 📄 Licence
 
 MIT License - Voir le fichier LICENSE pour plus de détails
