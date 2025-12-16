@@ -1,6 +1,6 @@
 # COLLOCOV - Plateforme de Colocation Étudiante et Covoiturage
 
-Plateforme web moderne pour la colocation étudiante et le covoiturage, développée avec HTML5, CSS3, SASS et JavaScript.
+Plateforme web moderne pour la colocation étudiante et le covoiturage, développée avec HTML5, CSS3, SASS et JavaScriptt.
 
 ## 📋 Table des matières
 
